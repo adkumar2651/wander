@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wander — Plan Your Dream Trip with AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#f5f0e8;--white:#fdfaf5;--dark:#1a1410;--navy:#0d1b2a;
+  --coral:#e8623a;--gold:#c9a84c;--green:#2d5a3d;
+  --text:#2a2015;--muted:#8a7d6b;--border:rgba(42,32,21,.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--coral);border-radius:2px}
+a{text-decoration:none;color:inherit}
+button{font-family:'DM Sans',sans-serif}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:22px 64px;transition:background .4s,box-shadow .4s}
+nav.scrolled{background:rgba(245,240,232,.94);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--border)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--dark);letter-spacing:-.5px;cursor:pointer}
+.logo span{color:var(--coral)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:.88rem;color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.wl-btn{display:flex;align-items:center;gap:7px;background:var(--white);border:1px solid var(--border);border-radius:100px;padding:9px 18px;cursor:pointer;font-size:.82rem;color:var(--text);transition:all .3s;position:relative}
+.wl-btn:hover{border-color:var(--coral);color:var(--coral)}
+.wl-badge{background:var(--coral);color:#fff;width:18px;height:18px;border-radius:50%;font-size:.6rem;font-weight:600;display:flex;align-items:center;justify-content:center;display:none}
+.wl-badge.show{display:flex}
+.nav-login{font-size:.85rem;color:var(--muted);cursor:pointer;transition:color .3s;padding:9px 14px}
+.nav-login:hover{color:var(--text)}
+.nav-cta{background:var(--coral);color:#fff;font-size:.82rem;font-weight:500;border:none;padding:11px 24px;cursor:pointer;border-radius:100px;transition:all .3s}
+.nav-cta:hover{background:#d4532e;transform:scale(1.03)}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 64px 80px;position:relative;overflow:hidden;background:var(--cream)}
+.hero-noise{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-orb1{position:absolute;right:-180px;top:-180px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,98,58,.12),transparent 65%);animation:drift 12s ease-in-out infinite}
+.hero-orb2{position:absolute;left:-120px;bottom:-120px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(45,90,61,.09),transparent 65%);animation:drift 15s ease-in-out infinite reverse}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,20px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(232,98,58,.1);border:1px solid rgba(232,98,58,.2);padding:7px 18px;border-radius:100px;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--coral);margin-bottom:32px;animation:fadeUp .8s .1s both}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,9vw,9rem);font-weight:600;line-height:.9;letter-spacing:-3px;text-align:center;animation:fadeUp .8s .2s both}
+.hero-title em{font-style:italic;color:var(--coral)}
+.hero-title .t2{color:var(--green)}
+.hero-sub{margin-top:28px;text-align:center;font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:520px;animation:fadeUp .8s .35s both}
+.hero-search{margin-top:48px;width:100%;max-width:700px;background:var(--white);border-radius:16px;box-shadow:0 8px 48px rgba(42,32,21,.12),0 2px 8px rgba(42,32,21,.06);display:flex;align-items:stretch;overflow:hidden;border:1px solid var(--border);animation:fadeUp .8s .5s both}
+.sf{flex:1;display:flex;align-items:center;gap:12px;padding:18px 22px;border-right:1px solid var(--border);cursor:pointer;transition:background .2s;min-width:0}
+.sf:hover{background:rgba(42,32,21,.03)}
+.sf-icon{font-size:1.1rem;flex-shrink:0}
+.sf-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.sf-val{font-size:.88rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-btn{background:var(--coral);color:#fff;border:none;padding:18px 30px;cursor:pointer;font-size:.85rem;font-weight:500;transition:background .3s;white-space:nowrap}
+.search-btn:hover{background:#d4532e}
+.hero-trust{margin-top:36px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .65s both}
+.trust-avs{display:flex}.av{width:34px;height:34px;border-radius:50%;border:2px solid var(--white);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:.9rem}.av:first-child{margin-left:0}
+.a1{background:#fddcb5}.a2{background:#b5d9fd}.a3{background:#b5fdd9}.a4{background:#fdb5d9}
+.trust-txt{font-size:.82rem;color:var(--muted)}.trust-txt b{color:var(--text);font-weight:500}
+.trust-sep{width:1px;height:24px;background:var(--border)}
+.trust-stat{font-size:.82rem;color:var(--muted)}.trust-stat b{color:var(--coral);font-weight:600}
+
+/* ── SECTIONS ── */
+section{padding:100px 64px}
+.sec-tag{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--coral);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-tag::before{content:'';width:24px;height:1px;background:var(--coral)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:600;letter-spacing:-1.5px;line-height:1}
+.sec-title em{font-style:italic;color:var(--coral)}
+
+/* ── DESTINATIONS ── */
+#destinations{background:var(--white)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;flex-wrap:wrap;gap:20px}
+.see-all{font-size:.83rem;color:var(--muted);cursor:pointer;transition:color .3s;border-bottom:1px solid var(--border);padding-bottom:2px}
+.see-all:hover{color:var(--coral)}
+.dest-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:260px 260px;gap:20px}
+.dest-card{border-radius:20px;overflow:hidden;position:relative;cursor:pointer;transition:transform .4s,box-shadow .4s}
+.dest-card:hover{transform:scale(1.02);box-shadow:0 24px 64px rgba(42,32,21,.15)}
+.dest-card.big{grid-row:span 2}
+.dest-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:6rem;transition:transform .5s}
+.dest-card.big .dest-bg{font-size:10rem}
+.dest-card:hover .dest-bg{transform:scale(1.07)}
+.dest-card:nth-child(1) .dest-bg{background:linear-gradient(160deg,#1a3a5c,#0d1b2a)}
+.dest-card:nth-child(2) .dest-bg{background:linear-gradient(160deg,#3a1a0d,#5c2a1a)}
+.dest-card:nth-child(3) .dest-bg{background:linear-gradient(160deg,#0d3a1a,#1a5c2a)}
+.dest-card:nth-child(4) .dest-bg{background:linear-gradient(160deg,#2a1a3a,#3a0d5c)}
+.dest-card:nth-child(5) .dest-bg{background:linear-gradient(160deg,#3a2a0d,#5c3a1a)}
+.dest-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.1) 50%,transparent 100%)}
+.dest-info{position:absolute;bottom:0;left:0;right:0;padding:24px;color:#fff;z-index:2}
+.dest-country{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:5px}
+.dest-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;line-height:1;margin-bottom:8px}
+.dest-card.big .dest-name{font-size:2.4rem}
+.dest-meta{display:flex;align-items:center;gap:10px;font-size:.72rem;opacity:.85}
+.dest-dtag{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);padding:3px 10px;border-radius:100px}
+.fav-btn{position:absolute;top:16px;right:16px;z-index:3;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.fav-btn:hover{background:rgba(255,255,255,.3);transform:scale(1.15)}
+.fav-btn.saved{background:rgba(232,98,58,.3);border-color:rgba(232,98,58,.5)}
+
+/* ── HOW IT WORKS ── */
+#how{background:var(--cream)}
+.how-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.how-phone{background:var(--dark);border-radius:40px;padding:16px;width:280px;margin:0 auto;box-shadow:0 40px 100px rgba(42,32,21,.25);border:1px solid rgba(255,255,255,.05)}
+.phone-screen{background:var(--navy);border-radius:28px;overflow:hidden;padding:20px 16px}
+.phone-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.phone-time{color:#fff;font-size:.82rem;font-weight:500}
+.phone-map{height:130px;border-radius:14px;margin-bottom:14px;background:linear-gradient(160deg,#1a3a5c,#0d2a40);display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.map-pin{position:absolute;top:38%;left:54%;font-size:1.4rem;animation:pinBounce 2s ease-in-out infinite}
+@keyframes pinBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.phone-card{background:rgba(255,255,255,.06);border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.phone-card-icon{font-size:1.3rem}
+.phone-card-name{color:#fff;font-size:.8rem;margin-bottom:2px}
+.phone-card-sub{color:rgba(255,255,255,.4);font-size:.68rem}
+.phone-card-price{margin-left:auto;color:var(--coral);font-weight:500;font-size:.85rem;white-space:nowrap}
+.phone-bottom{display:flex;justify-content:space-around;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)}
+.pb-btn{background:none;border:none;color:rgba(255,255,255,.35);font-size:1.1rem;cursor:pointer;padding:8px;transition:color .3s}
+.pb-btn.act{color:var(--coral)}
+.float-card{position:absolute;right:-40px;top:30px;background:var(--white);border-radius:16px;padding:14px 18px;box-shadow:0 12px 40px rgba(42,32,21,.12);width:150px;border:1px solid var(--border);animation:float 4s ease-in-out infinite}
+.float-card2{position:absolute;left:-44px;bottom:50px;background:var(--dark);border-radius:16px;padding:14px 18px;box-shadow:0 12px 40px rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.05);animation:float 5s ease-in-out infinite .5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fc-label{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.fc-val{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--coral);line-height:1}
+.fc-sub{font-size:.68rem;color:var(--muted);margin-top:3px}
+.fc2-label{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px}
+.fc2-stars{color:#f5c518;font-size:.95rem;margin-bottom:3px}
+.fc2-name{color:#fff;font-size:.82rem}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:22px;padding:28px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding-left .3s}
+.step:first-child{padding-top:0}
+.step:last-child{border-bottom:none}
+.step:hover{padding-left:8px}
+.step-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:rgba(42,32,21,.07);line-height:1;min-width:44px;transition:color .3s}
+.step:hover .step-n{color:rgba(232,98,58,.25)}
+.step-icon{font-size:1.3rem;margin-top:3px}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;letter-spacing:-.3px;margin-bottom:7px}
+.step-text{color:var(--muted);font-size:.85rem;line-height:1.7}
+
+/* ── EXPERIENCES ── */
+#experiences{background:var(--dark);color:var(--cream)}
+.exp-sec-tag{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.exp-sec-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
+.exp-sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:600;letter-spacing:-1.5px;line-height:1;color:var(--cream)}
+.exp-sec-title em{font-style:italic;color:var(--gold)}
+.exp-head{margin-bottom:52px}
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:52px}
+.exp-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;cursor:pointer;transition:border-color .3s,transform .3s}
+.exp-card:hover{border-color:rgba(201,168,76,.35);transform:translateY(-6px)}
+.exp-img{height:190px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative}
+.exp-card:nth-child(1) .exp-img{background:linear-gradient(135deg,#1e3a5f,#0a1f38)}
+.exp-card:nth-child(2) .exp-img{background:linear-gradient(135deg,#3a1e0a,#2a1205)}
+.exp-card:nth-child(3) .exp-img{background:linear-gradient(135deg,#1e3a25,#0a2215)}
+.exp-body{padding:22px}
+.exp-type{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.exp-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--cream);margin-bottom:9px}
+.exp-text{font-size:.82rem;color:rgba(245,240,232,.42);line-height:1.65;margin-bottom:16px}
+.exp-foot{display:flex;align-items:center;justify-content:space-between}
+.exp-dur{font-size:.72rem;color:rgba(245,240,232,.38);display:flex;align-items:center;gap:4px}
+.exp-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--coral)}
+.exp-cta-box{text-align:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:56px}
+.exp-cta-title{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:600;letter-spacing:-1px;margin-bottom:14px;color:var(--cream)}
+.exp-cta-sub{color:rgba(245,240,232,.45);max-width:440px;margin:0 auto 32px;font-size:.9rem;line-height:1.7}
+.exp-btn{background:var(--coral);color:#fff;font-size:.85rem;font-weight:500;border:none;padding:15px 36px;cursor:pointer;border-radius:100px;transition:all .3s;display:inline-block}
+.exp-btn:hover{background:#d4532e;transform:scale(1.04)}
+
+/* ── REVIEWS ── */
+#reviews{background:var(--white)}
+.rev-head{text-align:center;margin-bottom:56px}
+.rev-head .sec-tag{justify-content:center}
+.rev-head .sec-tag::before{display:none}
+.rev-head .sec-tag::after{content:'';width:24px;height:1px;background:var(--coral)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev-card{background:var(--cream);border-radius:20px;padding:32px;border:1px solid var(--border);transition:box-shadow .3s,transform .3s}
+.rev-card:hover{box-shadow:0 16px 48px rgba(42,32,21,.1);transform:translateY(-4px)}
+.rev-q{font-size:2rem;color:var(--coral);line-height:1;margin-bottom:14px;font-family:'Cormorant Garamond',serif}
+.rev-txt{font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:22px}
+.rev-txt em{color:var(--text);font-style:normal;font-weight:500}
+.rev-person{display:flex;align-items:center;gap:12px}
+.rev-av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.rev-card:nth-child(1) .rev-av{background:#fddcb5}
+.rev-card:nth-child(2) .rev-av{background:#b5fdd9}
+.rev-card:nth-child(3) .rev-av{background:#fdb5d9}
+.rev-stars{color:#f5c518;font-size:.78rem;margin-bottom:2px}
+.rev-name{font-weight:500;font-size:.88rem}
+.rev-loc{font-size:.72rem;color:var(--muted)}
+
+/* ── NEWSLETTER ── */
+#newsletter{background:var(--green);color:var(--cream);position:relative;overflow:hidden}
+.nl-orb{position:absolute;right:-100px;top:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(245,240,232,.06),transparent 65%);pointer-events:none}
+.nl-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.nl-tag{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,232,.5);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.nl-tag::before{content:'';width:24px;height:1px;background:rgba(245,240,232,.35)}
+.nl-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4.5vw,3.8rem);font-weight:600;letter-spacing:-2px;line-height:.95;margin-bottom:18px}
+.nl-title em{font-style:italic;color:rgba(232,98,58,.9)}
+.nl-sub{color:rgba(245,240,232,.5);font-size:.9rem;line-height:1.75}
+.nl-perks{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.nl-perk{display:flex;align-items:flex-start;gap:10px}
+.nl-perk-icon{font-size:1rem;flex-shrink:0;margin-top:2px}
+.nl-perk-text{font-size:.85rem;color:rgba(245,240,232,.55);line-height:1.5}
+.nl-perk-text b{color:rgba(245,240,232,.9);font-weight:500}
+.nl-form{display:flex;flex-direction:column;gap:12px}
+.nl-input{background:rgba(245,240,232,.08);border:1px solid rgba(245,240,232,.15);padding:15px 20px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.88rem;border-radius:12px;outline:none;transition:border-color .3s}
+.nl-input::placeholder{color:rgba(245,240,232,.3)}
+.nl-input:focus{border-color:rgba(245,240,232,.45)}
+.nl-submit{background:var(--coral);color:#fff;font-size:.85rem;font-weight:500;border:none;padding:15px 24px;cursor:pointer;border-radius:12px;transition:all .3s}
+.nl-submit:hover{background:#d4532e;transform:translateY(-2px)}
+.nl-note{font-size:.7rem;color:rgba(245,240,232,.3);text-align:center}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--cream);display:block;margin-bottom:14px}
+.footer-logo span{color:var(--coral)}
+.footer-brand p{font-size:.82rem;line-height:1.7;max-width:220px}
+.footer-col h4{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;color:rgba(245,240,232,.7);margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col a{font-size:.8rem;transition:color .3s}
+.footer-col a:hover{color:var(--cream)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-cr{font-size:.75rem}
+.footer-socials{display:flex;gap:10px}
+.soc{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.85rem;cursor:pointer;transition:all .3s;color:rgba(245,240,232,.4)}
+.soc:hover{border-color:var(--coral);color:var(--coral)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.reveal.up{opacity:1;transform:translateY(0)}
+
+/* ════════════════════════════
+   MODALS & OVERLAYS
+════════════════════════════ */
+.overlay{position:fixed;inset:0;background:rgba(26,20,16,.6);backdrop-filter:blur(4px);z-index:300;opacity:0;pointer-events:none;transition:opacity .35s}
+.overlay.open{opacity:1;pointer-events:all}
+
+/* ── DESTINATION DETAIL MODAL ── */
+.dest-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
+.dest-modal.open{opacity:1;pointer-events:all}
+.dm-box{background:var(--white);border-radius:24px;width:100%;max-width:860px;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(24px);transition:transform .35s}
+.dest-modal.open .dm-box{transform:translateY(0)}
+.dm-hero{height:320px;border-radius:24px 24px 0 0;display:flex;align-items:flex-end;padding:32px;position:relative;overflow:hidden}
+.dm-hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11rem;transition:transform .5s}
+.dm-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,.1) 50%,transparent)}
+.dm-hero-info{position:relative;z-index:2;color:#fff}
+.dm-country{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+.dm-name{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;line-height:1;margin-bottom:12px}
+.dm-tags{display:flex;gap:8px;flex-wrap:wrap}
+.dm-tag{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);padding:5px 14px;border-radius:100px;font-size:.75rem}
+.dm-close{position:absolute;top:20px;right:20px;z-index:5;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:none;cursor:pointer;font-size:1.1rem;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .3s}
+.dm-close:hover{background:rgba(255,255,255,.3)}
+.dm-body{padding:36px}
+.dm-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px}
+.dm-section-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:16px;color:var(--text)}
+.dm-itinerary{display:flex;flex-direction:column;gap:0}
+.dm-day{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
+.dm-day:last-child{border-bottom:none}
+.dm-day-n{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--coral);min-width:40px;line-height:1.3}
+.dm-day-content{}
+.dm-day-title{font-size:.85rem;font-weight:500;margin-bottom:3px}
+.dm-day-sub{font-size:.78rem;color:var(--muted)}
+.dm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.dm-stat{background:var(--cream);border-radius:12px;padding:16px;text-align:center}
+.dm-stat-n{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--coral);line-height:1}
+.dm-stat-l{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.dm-actions{display:flex;gap:12px}
+.dm-book-btn{flex:1;background:var(--coral);color:#fff;border:none;padding:16px;border-radius:12px;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .3s}
+.dm-book-btn:hover{background:#d4532e}
+.dm-save-btn{background:var(--cream);color:var(--text);border:1px solid var(--border);padding:16px 20px;border-radius:12px;font-size:.9rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:8px}
+.dm-save-btn:hover{border-color:var(--coral);color:var(--coral)}
+.dm-save-btn.saved{background:rgba(232,98,58,.08);border-color:var(--coral);color:var(--coral)}
+
+/* ── TRIP PLANNER MODAL ── */
+.planner-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
+.planner-modal.open{opacity:1;pointer-events:all}
+.pm-box{background:var(--white);border-radius:24px;width:100%;max-width:560px;position:relative;transform:translateY(24px);transition:transform .35s;overflow:hidden}
+.planner-modal.open .pm-box{transform:translateY(0)}
+.pm-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .3s;z-index:2}
+.pm-close:hover{background:var(--cream2)}
+.pm-steps-bar{display:flex;height:4px;background:var(--cream)}
+.pm-step-bar{flex:1;background:transparent;transition:background .4s}
+.pm-step-bar.done{background:var(--coral)}
+.pm-content{padding:40px}
+.pm-step-label{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--coral);margin-bottom:12px}
+.pm-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;letter-spacing:-.5px;margin-bottom:8px}
+.pm-sub{font-size:.85rem;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.pm-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.pm-opt{background:var(--cream);border:1.5px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:all .3s;text-align:center}
+.pm-opt:hover{border-color:var(--coral)}
+.pm-opt.sel{border-color:var(--coral);background:rgba(232,98,58,.07)}
+.pm-opt-icon{font-size:1.8rem;margin-bottom:8px}
+.pm-opt-label{font-size:.82rem;font-weight:500}
+.pm-input-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.pm-input-wrap{display:flex;flex-direction:column;gap:6px}
+.pm-input-label{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.pm-input{background:var(--cream);border:1.5px solid var(--border);padding:13px 16px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:border-color .3s}
+.pm-input:focus{border-color:var(--coral)}
+.pm-range-row{margin-bottom:28px}
+.pm-range{width:100%;accent-color:var(--coral)}
+.pm-range-labels{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:6px}
+.pm-budget-val{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--coral);text-align:center;margin-bottom:10px}
+.pm-next-btn{width:100%;background:var(--coral);color:#fff;border:none;padding:16px;border-radius:12px;font-size:.9rem;font-weight:500;cursor:pointer;transition:background .3s}
+.pm-next-btn:hover{background:#d4532e}
+.pm-result{display:none;flex-direction:column;gap:12px;margin-bottom:24px}
+.pm-result.show{display:flex}
+.pm-result-card{background:var(--cream);border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid var(--border)}
+.pm-rc-icon{font-size:1.6rem}
+.pm-rc-title{font-weight:500;font-size:.88rem;margin-bottom:3px}
+.pm-rc-sub{font-size:.75rem;color:var(--muted)}
+.pm-rc-price{margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--coral);white-space:nowrap}
+
+/* ── WISHLIST PANEL ── */
+.wl-panel{position:fixed;top:0;right:0;bottom:0;width:380px;background:var(--white);z-index:500;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);box-shadow:-8px 0 40px rgba(42,32,21,.12);display:flex;flex-direction:column}
+.wl-panel.open{transform:translateX(0)}
+.wl-header{padding:28px 28px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.wl-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600}
+.wl-close{width:36px;height:36px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .3s}
+.wl-close:hover{background:var(--cream2)}
+.wl-body{flex:1;overflow-y:auto;padding:20px 28px}
+.wl-empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.wl-empty-icon{font-size:3rem;margin-bottom:16px}
+.wl-empty-text{font-size:.9rem;line-height:1.6}
+.wl-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.wl-item:last-child{border-bottom:none}
+.wl-item-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.wl-item-name{font-weight:500;font-size:.88rem;margin-bottom:2px}
+.wl-item-sub{font-size:.75rem;color:var(--muted)}
+.wl-item-price{margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--coral);text-align:right;white-space:nowrap}
+.wl-item-del{width:28px;height:28px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
+.wl-item-del:hover{background:#ffddd5;color:var(--coral)}
+.wl-footer{padding:20px 28px;border-top:1px solid var(--border);flex-shrink:0}
+.wl-total{display:flex;justify-content:space-between;margin-bottom:14px;font-size:.85rem}
+.wl-total-n{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--coral)}
+.wl-plan-btn{width:100%;background:var(--coral);color:#fff;border:none;padding:14px;border-radius:12px;font-size:.88rem;font-weight:500;cursor:pointer;transition:background .3s}
+.wl-plan-btn:hover{background:#d4532e}
+
+/* ── EXPERIENCE DETAIL MODAL ── */
+.exp-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
+.exp-modal.open{opacity:1;pointer-events:all}
+.em-box{background:var(--dark);border-radius:24px;width:100%;max-width:580px;max-height:88vh;overflow-y:auto;position:relative;transform:translateY(24px);transition:transform .35s;color:var(--cream)}
+.exp-modal.open .em-box{transform:translateY(0)}
+.em-hero{height:240px;display:flex;align-items:flex-end;padding:28px;position:relative;overflow:hidden;border-radius:24px 24px 0 0}
+.em-hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7rem}
+.em-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,.9),transparent 50%)}
+.em-info{position:relative;z-index:2}
+.em-type{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.em-name{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;line-height:1}
+.em-close{position:absolute;top:16px;right:16px;z-index:5;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);border:none;cursor:pointer;font-size:1rem;color:#fff;display:flex;align-items:center;justify-content:center}
+.em-close:hover{background:rgba(255,255,255,.2)}
+.em-body{padding:28px}
+.em-desc{font-size:.88rem;color:rgba(245,240,232,.55);line-height:1.75;margin-bottom:24px}
+.em-includes{margin-bottom:24px}
+.em-includes h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;margin-bottom:12px}
+.em-inc-list{display:flex;flex-direction:column;gap:8px}
+.em-inc{display:flex;align-items:center;gap:10px;font-size:.83rem;color:rgba(245,240,232,.55)}
+.em-inc::before{content:'✦';color:var(--gold);font-size:.6rem;flex-shrink:0}
+.em-foot{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(255,255,255,.07)}
+.em-price-block{}
+.em-price-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:4px}
+.em-price{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--coral)}
+.em-book-btn{background:var(--coral);color:#fff;border:none;padding:14px 28px;border-radius:100px;font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s}
+.em-book-btn:hover{background:#d4532e}
+
+/* ── LOGIN MODAL ── */
+.login-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
+.login-modal.open{opacity:1;pointer-events:all}
+.lm-box{background:var(--white);border-radius:24px;width:100%;max-width:420px;padding:44px;position:relative;transform:translateY(24px);transition:transform .35s}
+.login-modal.open .lm-box{transform:translateY(0)}
+.lm-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.lm-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:8px}
+.lm-logo span{color:var(--coral)}
+.lm-sub{font-size:.85rem;color:var(--muted);margin-bottom:28px;line-height:1.6}
+.lm-tabs{display:flex;background:var(--cream);border-radius:10px;padding:4px;margin-bottom:24px}
+.lm-tab{flex:1;padding:9px;border-radius:7px;border:none;background:transparent;font-size:.83rem;cursor:pointer;transition:all .2s;color:var(--muted)}
+.lm-tab.act{background:var(--white);color:var(--text);font-weight:500;box-shadow:0 1px 4px rgba(42,32,21,.08)}
+.lm-form{display:flex;flex-direction:column;gap:12px}
+.lm-input{background:var(--cream);border:1.5px solid var(--border);padding:13px 16px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--text);outline:none;transition:border-color .3s}
+.lm-input:focus{border-color:var(--coral)}
+.lm-btn{background:var(--coral);color:#fff;border:none;padding:14px;border-radius:10px;font-size:.88rem;font-weight:500;cursor:pointer;transition:background .3s;margin-top:4px}
+.lm-btn:hover{background:#d4532e}
+.lm-or{text-align:center;font-size:.75rem;color:var(--muted);margin:4px 0;position:relative}
+.lm-or::before,.lm-or::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:var(--border)}
+.lm-or::before{left:0}.lm-or::after{right:0}
+.lm-google{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:13px;cursor:pointer;font-size:.85rem;font-weight:500;transition:border-color .3s}
+.lm-google:hover{border-color:var(--coral)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--dark);color:var(--cream);border-radius:100px;padding:13px 26px;font-size:.82rem;box-shadow:0 8px 32px rgba(0,0,0,.2);opacity:0;transition:all .4s;z-index:9999;white-space:nowrap;border:1px solid rgba(255,255,255,.07);pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:960px){
+  nav{padding:16px 22px}.nav-links{display:none}
+  section,footer{padding-left:22px;padding-right:22px}
+  #hero{padding:110px 22px 70px}
+  .hero-search{flex-wrap:wrap}.sf{border-right:none;border-bottom:1px solid var(--border)}
+  .dest-grid,.how-inner,.exp-grid,.rev-grid,.nl-inner,.footer-inner{grid-template-columns:1fr}
+  .dest-card.big{grid-row:span 1}.dest-card.big .dest-bg{font-size:7rem}
+  .dest-grid{grid-template-rows:auto}
+  .float-card,.float-card2{display:none}
+  .dm-grid{grid-template-columns:1fr}
+  .wl-panel{width:100%;max-width:400px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── OVERLAY ── -->
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <span class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">wan<span>der</span></span>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="wl-btn" onclick="openWishlist()">
+      ❤️ Saved <span class="wl-badge" id="wl-badge">0</span>
+    </button>
+    <span class="nav-login" onclick="openLogin()">Log in</span>
+    <button class="nav-cta" onclick="openPlanner()">Plan a Trip ✦</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-tag">✦ AI-Powered Travel Planning</div>
+  <h1 class="hero-title">Go<br><em>Somewhere</em><br><span class="t2">Beautiful.</span></h1>
+  <p class="hero-sub">Tell us your dream — mountains, beaches, streets of old cities. Our AI builds your perfect itinerary in seconds.</p>
+  <div class="hero-search">
+    <div class="sf" onclick="openPlanner()">
+      <span class="sf-icon">🌍</span>
+      <div><div class="sf-label">Destination</div><div class="sf-val">Where to?</div></div>
+    </div>
+    <div class="sf" onclick="openPlanner()">
+      <span class="sf-icon">📅</span>
+      <div><div class="sf-label">Dates</div><div class="sf-val">Apr 12 — Apr 20</div></div>
+    </div>
+    <div class="sf" onclick="openPlanner()">
+      <span class="sf-icon">👥</span>
+      <div><div class="sf-label">Travellers</div><div class="sf-val">2 Adults</div></div>
+    </div>
+    <button class="search-btn" onclick="openPlanner()">Plan My Trip ✦</button>
+  </div>
+  <div class="hero-trust">
+    <div class="trust-avs">
+      <div class="av a1">😊</div><div class="av a2">🧳</div><div class="av a3">🌏</div><div class="av a4">✈️</div>
+    </div>
+    <div class="trust-txt"><b>28,000+</b> travellers planned this month</div>
+    <div class="trust-sep"></div>
+    <div class="trust-stat">Rated <b>4.9★</b> on TrustPilot</div>
+  </div>
+</section>
+
+<!-- ── DESTINATIONS ── -->
+<section id="destinations">
+  <div class="sec-head reveal">
+    <div>
+      <div class="sec-tag">Top Picks</div>
+      <h2 class="sec-title">Trending <em>Right Now</em></h2>
+    </div>
+    <span class="see-all" onclick="openPlanner()">View all 180+ destinations →</span>
+  </div>
+  <div class="dest-grid reveal">
+    <div class="dest-card big" onclick="openDest('santorini')">
+      <div class="dest-bg">🏛️</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <div class="dest-country">Greece</div>
+        <div class="dest-name">Santorini</div>
+        <div class="dest-meta"><span class="dest-dtag">7 Days</span><span>From ₹85,000</span></div>
+      </div>
+      <button class="fav-btn" id="fav-santorini" onclick="event.stopPropagation();toggleFav('santorini')">🤍</button>
+    </div>
+    <div class="dest-card" onclick="openDest('kyoto')">
+      <div class="dest-bg">🌸</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <div class="dest-country">Japan</div>
+        <div class="dest-name">Kyoto</div>
+        <div class="dest-meta"><span class="dest-dtag">5 Days</span><span>From ₹72,000</span></div>
+      </div>
+      <button class="fav-btn" id="fav-kyoto" onclick="event.stopPropagation();toggleFav('kyoto')">🤍</button>
+    </div>
+    <div class="dest-card" onclick="openDest('amalfi')">
+      <div class="dest-bg">⛵</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <div class="dest-country">Italy</div>
+        <div class="dest-name">Amalfi Coast</div>
+        <div class="dest-meta"><span class="dest-dtag">6 Days</span><span>From ₹96,000</span></div>
+      </div>
+      <button class="fav-btn" id="fav-amalfi" onclick="event.stopPropagation();toggleFav('amalfi')">🤍</button>
+    </div>
+    <div class="dest-card" onclick="openDest('marrakech')">
+      <div class="dest-bg">🕌</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <div class="dest-country">Morocco</div>
+        <div class="dest-name">Marrakech</div>
+        <div class="dest-meta"><span class="dest-dtag">4 Days</span><span>From ₹48,000</span></div>
+      </div>
+      <button class="fav-btn" id="fav-marrakech" onclick="event.stopPropagation();toggleFav('marrakech')">🤍</button>
+    </div>
+    <div class="dest-card" onclick="openDest('bali')">
+      <div class="dest-bg">🌴</div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <div class="dest-country">Indonesia</div>
+        <div class="dest-name">Bali</div>
+        <div class="dest-meta"><span class="dest-dtag">8 Days</span><span>From ₹55,000</span></div>
+      </div>
+      <button class="fav-btn" id="fav-bali" onclick="event.stopPropagation();toggleFav('bali')">🤍</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="how-inner">
+    <div style="position:relative" class="reveal">
+      <div class="how-phone">
+        <div class="phone-screen">
+          <div class="phone-top"><span class="phone-time">9:41</span><span style="color:rgba(255,255,255,.4);font-size:.7rem">📶 🔋</span></div>
+          <div class="phone-map">🗺️<div class="map-pin">📍</div></div>
+          <div class="phone-card"><span class="phone-card-icon">✈️</span><div><div class="phone-card-name">Delhi → Santorini</div><div class="phone-card-sub">Apr 12 · Economy</div></div><span class="phone-card-price">₹42k</span></div>
+          <div class="phone-card"><span class="phone-card-icon">🏨</span><div><div class="phone-card-name">Caldera Villas</div><div class="phone-card-sub">7 nights · Sea view</div></div><span class="phone-card-price">₹28k</span></div>
+          <div class="phone-bottom"><button class="pb-btn act">🏠</button><button class="pb-btn">🔍</button><button class="pb-btn">❤️</button><button class="pb-btn">👤</button></div>
+        </div>
+      </div>
+      <div class="float-card"><div class="fc-label">AI Saved You</div><div class="fc-val">₹18k</div><div class="fc-sub">vs booking manually</div></div>
+      <div class="float-card2"><div class="fc2-label">Top Rated</div><div class="fc2-stars">★★★★★</div><div class="fc2-name">Caldera Villas</div></div>
+    </div>
+    <div class="reveal">
+      <div class="sec-tag">How Wander Works</div>
+      <h2 class="sec-title">Your Dream Trip,<br><em>Built by AI.</em></h2>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.75;margin-top:14px;margin-bottom:36px;max-width:380px">Three steps from "I want to travel" to bags packed and boarding pass in hand.</p>
+      <div class="steps">
+        <div class="step" onclick="openPlanner()"><div class="step-n">01</div><div class="step-icon">💬</div><div><div class="step-title">Tell Us Your Dream</div><p class="step-text">Type anything — "beach for 7 days under ₹80k". Our AI understands natural language, not just filters.</p></div></div>
+        <div class="step" onclick="openPlanner()"><div class="step-n">02</div><div class="step-icon">🧠</div><div><div class="step-title">AI Builds Your Itinerary</div><p class="step-text">Full day-by-day plan: flights, hotels, experiences — all personalised to your budget and style.</p></div></div>
+        <div class="step" onclick="openPlanner()"><div class="step-n">03</div><div class="step-icon">✈️</div><div><div class="step-title">Book in One Click</div><p class="step-text">Approve your plan, and we handle everything. Confirmed in minutes. No 12 browser tabs.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCES ── -->
+<section id="experiences">
+  <div class="exp-head reveal">
+    <div class="exp-sec-tag">Curated Experiences</div>
+    <h2 class="exp-sec-title">Beyond <em>Tourism.</em></h2>
+  </div>
+  <div class="exp-grid reveal">
+    <div class="exp-card" onclick="openExp('cooking')">
+      <div class="exp-img">🍳</div>
+      <div class="exp-body">
+        <div class="exp-type">Food & Culture</div>
+        <div class="exp-name">Private Cooking Class in Bologna</div>
+        <p class="exp-text">Learn to make fresh pasta from a Bolognese grandmother. Maximum 6 guests.</p>
+        <div class="exp-foot"><span class="exp-dur">⏱ 4 hours</span><span class="exp-price">₹4,800/person</span></div>
+      </div>
+    </div>
+    <div class="exp-card" onclick="openExp('fuji')">
+      <div class="exp-img">🏔️</div>
+      <div class="exp-body">
+        <div class="exp-type">Adventure</div>
+        <div class="exp-name">Sunrise Trek on Mount Fuji</div>
+        <p class="exp-text">Guided night ascent to Japan's sacred peak for one of the world's most famous sunrises.</p>
+        <div class="exp-foot"><span class="exp-dur">⏱ 10 hours</span><span class="exp-price">₹6,200/person</span></div>
+      </div>
+    </div>
+    <div class="exp-card" onclick="openExp('sahara')">
+      <div class="exp-img">🐪</div>
+      <div class="exp-body">
+        <div class="exp-type">Immersive</div>
+        <div class="exp-name">Sahara Desert Overnight Camp</div>
+        <p class="exp-text">Camel trek into the dunes, followed by a night under stars in a luxury Berber camp.</p>
+        <div class="exp-foot"><span class="exp-dur">⏱ 24 hours</span><span class="exp-price">₹8,500/person</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="exp-cta-box reveal">
+    <div class="exp-cta-title">200+ Unique Experiences Worldwide</div>
+    <p class="exp-cta-sub">From private island dinners to volcano hikes — every experience handpicked and bookable in seconds.</p>
+    <button class="exp-btn" onclick="openPlanner()">Browse All Experiences →</button>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section id="reviews">
+  <div class="rev-head reveal">
+    <div class="sec-tag">Traveller Stories</div>
+    <h2 class="sec-title">Real Trips.<br><em>Real Memories.</em></h2>
+  </div>
+  <div class="rev-grid reveal">
+    <div class="rev-card">
+      <div class="rev-q">"</div>
+      <p class="rev-txt">I typed "romantic Europe trip, 10 days, surprise my wife" and Wander gave me the most <em>perfect itinerary</em> I could have imagined. She cried happy tears in Cinque Terre.</p>
+      <div class="rev-person"><div class="rev-av">👨</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">Vikram Nair</div><div class="rev-loc">Bengaluru · Oct 2024</div></div></div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-q">"</div>
+      <p class="rev-txt">Solo travel used to feel overwhelming. Wander planned my <em>3-week Japan trip</em> down to train schedules and restaurant reservations. I just showed up and enjoyed.</p>
+      <div class="rev-person"><div class="rev-av">👩</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">Ananya Joshi</div><div class="rev-loc">Mumbai · Feb 2025</div></div></div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-q">"</div>
+      <p class="rev-txt">Saved us <em>₹22,000</em> compared to a regular travel agent. The AI found a better hotel, cheaper flights, and added two experiences we didn't even know existed.</p>
+      <div class="rev-person"><div class="rev-av">👨‍👩‍👧</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">The Khanna Family</div><div class="rev-loc">Delhi · Dec 2024</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ── -->
+<section id="newsletter">
+  <div class="nl-orb"></div>
+  <div class="nl-inner">
+    <div class="reveal">
+      <div class="nl-tag">Get Started Free</div>
+      <h2 class="nl-title">Your Next <em>Adventure</em><br>Awaits.</h2>
+      <p class="nl-sub">Join 28,000+ travellers who let AI plan their perfect trip.</p>
+      <div class="nl-perks">
+        <div class="nl-perk"><span class="nl-perk-icon">✦</span><div class="nl-perk-text"><b>Free itinerary builder</b> — generate unlimited AI trip plans</div></div>
+        <div class="nl-perk"><span class="nl-perk-icon">✦</span><div class="nl-perk-text"><b>Price alerts</b> — we track flights so you save money</div></div>
+        <div class="nl-perk"><span class="nl-perk-icon">✦</span><div class="nl-perk-text"><b>24/7 travel support</b> — human + AI help anytime</div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="nl-form">
+        <input class="nl-input" id="nl-name" type="text" placeholder="Your name"/>
+        <input class="nl-input" id="nl-email" type="email" placeholder="your@email.com"/>
+        <button class="nl-submit" onclick="handleNewsletter()">Start Planning for Free ✈️</button>
+        <p class="nl-note">No spam. No credit card. Just great trips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">wan<span>der</span></span>
+      <p>AI-powered travel planning that turns your dreams into real itineraries — instantly.</p>
+    </div>
+    <div class="footer-col"><h4>Destinations</h4><ul><li><a href="#">Europe</a></li><li><a href="#">Asia</a></li><li><a href="#">Americas</a></li><li><a href="#">Africa</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Help Centre</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Cancellations</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-cr">© 2025 Wander Technologies Pvt. Ltd.</span>
+    <div class="footer-socials">
+      <div class="soc">𝕏</div><div class="soc">in</div><div class="soc">📷</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════ DESTINATION MODAL ════ -->
+<div class="dest-modal" id="dest-modal">
+  <div class="dm-box" id="dm-box">
+    <div class="dm-hero" id="dm-hero">
+      <div class="dm-hero-bg" id="dm-hero-bg"></div>
+      <div class="dm-overlay"></div>
+      <div class="dm-hero-info">
+        <div class="dm-country" id="dm-country"></div>
+        <div class="dm-name" id="dm-name"></div>
+        <div class="dm-tags" id="dm-tags"></div>
+      </div>
+      <button class="dm-close" onclick="closeModal('dest-modal')">✕</button>
+    </div>
+    <div class="dm-body">
+      <div class="dm-stats" id="dm-stats"></div>
+      <div class="dm-grid">
+        <div>
+          <div class="dm-section-title">Sample Itinerary</div>
+          <div class="dm-itinerary" id="dm-itinerary"></div>
+        </div>
+        <div>
+          <div class="dm-section-title">Trip Highlights</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px" id="dm-highlights"></div>
+        </div>
+      </div>
+      <div class="dm-actions">
+        <button class="dm-book-btn" onclick="bookDest()">Book This Trip →</button>
+        <button class="dm-save-btn" id="dm-save-btn" onclick="saveFromModal()">🤍 Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PLANNER MODAL ════ -->
+<div class="planner-modal" id="planner-modal">
+  <div class="pm-box">
+    <button class="pm-close" onclick="closeModal('planner-modal')">✕</button>
+    <div class="pm-steps-bar">
+      <div class="pm-step-bar" id="psb1"></div>
+      <div class="pm-step-bar" id="psb2"></div>
+      <div class="pm-step-bar" id="psb3"></div>
+      <div class="pm-step-bar" id="psb4"></div>
+    </div>
+    <div class="pm-content" id="pm-content"></div>
+  </div>
+</div>
+
+<!-- ════ EXPERIENCE MODAL ════ -->
+<div class="exp-modal" id="exp-modal">
+  <div class="em-box">
+    <button class="em-close" onclick="closeModal('exp-modal')">✕</button>
+    <div class="em-hero" id="em-hero">
+      <div class="em-hero-bg" id="em-hero-bg"></div>
+      <div class="em-overlay"></div>
+      <div class="em-info">
+        <div class="em-type" id="em-type"></div>
+        <div class="em-name" id="em-name"></div>
+      </div>
+    </div>
+    <div class="em-body">
+      <p class="em-desc" id="em-desc"></p>
+      <div class="em-includes">
+        <h4>What's Included</h4>
+        <div class="em-inc-list" id="em-includes"></div>
+      </div>
+      <div class="em-foot">
+        <div class="em-price-block">
+          <div class="em-price-label">Price per person</div>
+          <div class="em-price" id="em-price"></div>
+        </div>
+        <button class="em-book-btn" onclick="bookExp()">Book Experience →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ LOGIN MODAL ════ -->
+<div class="login-modal" id="login-modal">
+  <div class="lm-box">
+    <button class="lm-close" onclick="closeModal('login-modal')">✕</button>
+    <div class="lm-logo">wan<span>der</span></div>
+    <p class="lm-sub">Sign in to save trips, get price alerts, and access your itineraries.</p>
+    <div class="lm-tabs">
+      <button class="lm-tab act" id="lm-tab-login" onclick="switchLmTab('login')">Log In</button>
+      <button class="lm-tab" id="lm-tab-signup" onclick="switchLmTab('signup')">Sign Up</button>
+    </div>
+    <div id="lm-login-form" class="lm-form">
+      <input class="lm-input" id="lm-email" type="email" placeholder="Email address"/>
+      <input class="lm-input" id="lm-pass" type="password" placeholder="Password"/>
+      <button class="lm-btn" onclick="handleLogin()">Log In →</button>
+      <div class="lm-or">or</div>
+      <button class="lm-google" onclick="handleGoogleLogin()"><span>🔵</span> Continue with Google</button>
+    </div>
+    <div id="lm-signup-form" class="lm-form" style="display:none">
+      <input class="lm-input" id="lm-sname" type="text" placeholder="Full name"/>
+      <input class="lm-input" id="lm-semail" type="email" placeholder="Email address"/>
+      <input class="lm-input" id="lm-spass" type="password" placeholder="Create password"/>
+      <button class="lm-btn" onclick="handleSignup()">Create Account →</button>
+      <div class="lm-or">or</div>
+      <button class="lm-google" onclick="handleGoogleLogin()"><span>🔵</span> Continue with Google</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ WISHLIST PANEL ════ -->
+<div class="wl-panel" id="wl-panel">
+  <div class="wl-header">
+    <div class="wl-title">❤️ Saved Trips</div>
+    <button class="wl-close" onclick="closeWishlist()">✕</button>
+  </div>
+  <div class="wl-body" id="wl-body"></div>
+  <div class="wl-footer" id="wl-footer" style="display:none">
+    <div class="wl-total">
+      <span style="font-size:.82rem;color:var(--muted)">Total est. budget</span>
+      <div class="wl-total-n" id="wl-total"></div>
+    </div>
+    <button class="wl-plan-btn" onclick="closeWishlist();openPlanner()">Plan All Saved Trips →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════
+// DATA
+// ════════════════════════════
+const DESTINATIONS = {
+  santorini:{name:'Santorini',country:'Greece',emoji:'🏛️',days:'7 Days',price:'₹85,000',bg:'linear-gradient(160deg,#1a3a5c,#0d1b2a)',tags:['Beach','Culture','Romantic'],stats:[{n:'7',l:'Days'},{n:'₹85k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Thira',s:'Airport transfer & check-in at Caldera Villa'},{d:'Day 2',t:'Oia Sunset Walk',s:'Explore the iconic blue-domed churches'},{d:'Day 3',t:'Akrotiri Ruins',s:'Ancient Minoan city buried by volcano'},{d:'Day 4',t:'Wine & Volcano Cruise',s:'Catamaran with dinner and hot springs'},{d:'Day 5',t:'Black Beach Day',s:'Perissa beach & local tavernas'},{d:'Day 6',t:'Fira Town',s:'Shopping, museums, and cable car views'},{d:'Day 7',t:'Depart',s:'Morning flight back home'}],highlights:['🌅 World-famous caldera sunsets','🍷 Award-winning volcanic wines','⛵ Private catamaran cruise','🏛️ 3,500-year-old Akrotiri ruins','🍽️ Cliffside seafood dining']},
+  kyoto:{name:'Kyoto',country:'Japan',emoji:'🌸',days:'5 Days',price:'₹72,000',bg:'linear-gradient(160deg,#3a1a0d,#5c2a1a)',tags:['Culture','History','Nature'],stats:[{n:'5',l:'Days'},{n:'₹72k',l:'From'},{n:'4.8★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Fushimi Inari',s:'1000 torii gates at dawn, before crowds'},{d:'Day 2',t:'Arashiyama',s:'Bamboo grove + monkey park + boat ride'},{d:'Day 3',t:'Gion District',s:'Geisha quarter, Hanamikoji street'},{d:'Day 4',t:'Nishiki Market + Kinkakuji',s:'Food market and the Golden Pavilion'},{d:'Day 5',t:'Tea Ceremony + Depart',s:'Traditional matcha experience before flight'}],highlights:['⛩️ 1000+ torii gates at Fushimi','🎋 Arashiyama bamboo forest','🎭 Gion geisha district','🍵 Traditional tea ceremony','🌸 Cherry blossom season (Mar-Apr)']},
+  amalfi:{name:'Amalfi Coast',country:'Italy',emoji:'⛵',days:'6 Days',price:'₹96,000',bg:'linear-gradient(160deg,#0d3a1a,#1a5c2a)',tags:['Scenic','Food','Romance'],stats:[{n:'6',l:'Days'},{n:'₹96k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Naples',s:'Drive the coastal road, check in at Positano'},{d:'Day 2',t:'Positano',s:'Beach, cliffs, limoncello, sunset at Le Tre Sorelle'},{d:'Day 3',t:'Ravello & Amalfi Town',s:'Villa Rufolo gardens and cathedral'},{d:'Day 4',t:'Capri Day Trip',s:'Blue Grotto, Via Camerelle, boat tour'},{d:'Day 5',t:'Pompeii',s:'Ancient Roman city preserved by Vesuvius'},{d:'Day 6',t:'Farewell Feast',s:'Private cooking class, then fly home'}],highlights:['🍋 Famous Amalfi lemons and limoncello','🏛️ Ancient Pompeii ruins','💎 Capri island day trip','🍝 Private Italian cooking class','🌊 Crystal-clear Tyrrhenian Sea']},
+  marrakech:{name:'Marrakech',country:'Morocco',emoji:'🕌',days:'4 Days',price:'₹48,000',bg:'linear-gradient(160deg,#2a1a3a,#3a0d5c)',tags:['Culture','Markets','Adventure'],stats:[{n:'4',l:'Days'},{n:'₹48k',l:'From'},{n:'4.7★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Jemaa el-Fna',s:'Arrive, explore the main square at dusk'},{d:'Day 2',t:'Medina & Souks',s:'Maze of spice markets, tanneries, and crafts'},{d:'Day 3',t:'Atlas Mountains',s:'Day trip, Berber village, traditional lunch'},{d:'Day 4',t:'Majorelle Garden',s:'Yves Saint Laurent garden + Museum'}],highlights:['🎪 Jemaa el-Fna square at night','🏺 Ancient medina and souks','⛰️ Atlas Mountains day trip','🌺 Majorelle Garden','🍵 Mint tea ceremony']},
+  bali:{name:'Bali',country:'Indonesia',emoji:'🌴',days:'8 Days',price:'₹55,000',bg:'linear-gradient(160deg,#3a2a0d,#5c3a1a)',tags:['Beaches','Wellness','Culture'],stats:[{n:'8',l:'Days'},{n:'₹55k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Denpasar',s:'Transfer to Ubud jungle retreat'},{d:'Day 2',t:'Ubud',s:'Monkey forest, rice terraces, craft markets'},{d:'Day 3',t:'Yoga & Spa',s:'Sunrise yoga, Ayurvedic massage'},{d:'Day 4',t:'Tegalalang Rice Terrace',s:'Sunrise hike and traditional breakfast'},{d:'Day 5',t:'Seminyak Beach',s:'Move to beach villa, sunset cocktails'},{d:'Day 6',t:'Uluwatu Temple',s:'Cliff-top temple, Kecak fire dance at sunset'},{d:'Day 7',t:'Nusa Penida Island',s:'Snorkelling, Kelingking Beach'},{d:'Day 8',t:'Depart',s:'Morning beach walk, fly home'}],highlights:['🌾 Tegalalang rice terraces','🕌 Uluwatu cliff-top temple','🤿 Nusa Penida snorkelling','🧘 Ubud yoga and wellness','🌅 World-famous sunsets']}
+};
+
+const EXPERIENCES = {
+  cooking:{type:'Food & Culture',name:'Private Cooking Class in Bologna',emoji:'🍳',bg:'linear-gradient(135deg,#1e3a5f,#0a1f38)',price:'₹4,800',desc:'Join a Bolognese grandmother in her private kitchen for a hands-on 4-hour pasta making session. You\'ll learn to make fresh tagliatelle, tortellini, and the real ragù Bolognese that has fed her family for generations. Maximum 6 guests ensures personal attention.',includes:['All ingredients and equipment provided','Aperitivo on arrival with local wine','Take home your handmade pasta','Recipe booklet in English and Hindi','Private transfer from city centre']},
+  fuji:{type:'Adventure',name:'Sunrise Trek on Mount Fuji',emoji:'🏔️',bg:'linear-gradient(135deg,#3a1e0a,#2a1205)',price:'₹6,200',desc:'Begin your ascent at midnight from the Fuji Subaru Line 5th Station with an expert English-speaking guide. Reach the 3,776m crater rim just as the sun rises over Japan — an experience described by travellers as life-changing. All fitness levels welcome with proper pacing.',includes:['Expert English-speaking mountain guide','Headlamp and trekking poles provided','Summit certificate','Hot ramen at the summit hut','Transport from central Tokyo']},
+  sahara:{type:'Immersive',name:'Sahara Desert Overnight Camp',emoji:'🐪',bg:'linear-gradient(135deg,#1e3a25,#0a2215)',price:'₹8,500',desc:'Journey two hours into Morocco\'s Erg Chebbi dunes by camel at sunset. Your luxury Berber camp awaits with private tent, en-suite bathroom, and a king-sized bed under a canvas canopy. Dinner is a traditional Moroccan feast of tagine and msemen, followed by live Gnawa music around the fire.',includes:['Return camel trek (1 hour each way)','Luxury private tent with en-suite','4-course Moroccan dinner','Live Berber music and storytelling','Sunrise wake-up call with mint tea','Professional stargazing guide']}
+};
+
+// ════════════════════════════
+// WISHLIST (localStorage)
+// ════════════════════════════
+function getWL(){try{return JSON.parse(localStorage.getItem('wander_wl')||'[]')}catch{return[]}}
+function setWL(wl){localStorage.setItem('wander_wl',JSON.stringify(wl))}
+function updateBadge(){
+  const wl=getWL();const b=document.getElementById('wl-badge');
+  b.textContent=wl.length;b.classList.toggle('show',wl.length>0);
+}
+function toggleFav(id){
+  let wl=getWL();const d=DESTINATIONS[id];
+  const idx=wl.findIndex(x=>x.id===id);
+  const btn=document.getElementById('fav-'+id);
+  if(idx>=0){
+    wl.splice(idx,1);btn.textContent='🤍';btn.classList.remove('saved');
+    showToast(d.name+' saved trips se hata diya');
+  } else {
+    wl.push({id,name:d.name,country:d.country,emoji:d.emoji,price:d.price,days:d.days,bg:d.bg});
+    btn.textContent='❤️';btn.classList.add('saved');
+    showToast(d.name+' saved! ❤️ Wishlist mein add ho gaya');
+  }
+  setWL(wl);updateBadge();
+  const dsb=document.getElementById('dm-save-btn');
+  if(dsb&&dsb.dataset.id===id){updateDmSaveBtn(id)}
+}
+function saveFromModal(){
+  const id=document.getElementById('dm-save-btn').dataset.id;
+  if(id)toggleFav(id);
+}
+function updateDmSaveBtn(id){
+  const wl=getWL();const saved=wl.some(x=>x.id===id);
+  const btn=document.getElementById('dm-save-btn');
+  btn.textContent=saved?'❤️ Saved':'🤍 Save';
+  btn.classList.toggle('saved',saved);
+}
+function initFavBtns(){
+  const wl=getWL();
+  wl.forEach(item=>{
+    const btn=document.getElementById('fav-'+item.id);
+    if(btn){btn.textContent='❤️';btn.classList.add('saved')}
+  });
+}
+updateBadge();
+
+// ════════════════════════════
+// OPEN / CLOSE
+// ════════════════════════════
+let currentDest=null;
+function openOverlay(){document.getElementById('overlay').classList.add('open')}
+function closeOverlay(){document.getElementById('overlay').classList.remove('open')}
+function openModal(id){document.getElementById(id).classList.add('open');openOverlay()}
+function closeModal(id){document.getElementById(id).classList.remove('open');closeOverlay()}
+function closeAll(){
+  ['dest-modal','planner-modal','exp-modal','login-modal'].forEach(id=>document.getElementById(id).classList.remove('open'));
+  closeOverlay();
+}
+
+// ── DESTINATION MODAL ──
+function openDest(id){
+  const d=DESTINATIONS[id];currentDest=id;
+  document.getElementById('dm-hero').style.background=d.bg;
+  document.getElementById('dm-hero-bg').textContent=d.emoji;
+  document.getElementById('dm-hero-bg').style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11rem;filter:opacity(.4)';
+  document.getElementById('dm-country').textContent=d.country;
+  document.getElementById('dm-name').textContent=d.name;
+  document.getElementById('dm-tags').innerHTML=d.tags.map(t=>`<span class="dm-tag">${t}</span>`).join('');
+  document.getElementById('dm-stats').innerHTML=d.stats.map(s=>`<div class="dm-stat"><div class="dm-stat-n">${s.n}</div><div class="dm-stat-l">${s.l}</div></div>`).join('');
+  document.getElementById('dm-itinerary').innerHTML=d.itinerary.map(x=>`<div class="dm-day"><div class="dm-day-n">${x.d}</div><div class="dm-day-content"><div class="dm-day-title">${x.t}</div><div class="dm-day-sub">${x.s}</div></div></div>`).join('');
+  document.getElementById('dm-highlights').innerHTML=d.highlights.map(h=>`<div style="font-size:.83rem;color:var(--muted);display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)">${h}</div>`).join('');
+  document.getElementById('dm-save-btn').dataset.id=id;
+  updateDmSaveBtn(id);
+  openModal('dest-modal');
+}
+function bookDest(){
+  closeModal('dest-modal');
+  const d=DESTINATIONS[currentDest];
+  showToast('Booking process start ho raha hai ✈️ — '+(d?d.name:''));
+  setTimeout(()=>openPlanner(),400);
+}
+
+// ── EXPERIENCE MODAL ──
+function openExp(id){
+  const e=EXPERIENCES[id];
+  document.getElementById('em-hero').style.background=e.bg;
+  document.getElementById('em-hero-bg').textContent=e.emoji;
+  document.getElementById('em-hero-bg').style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7rem;filter:opacity(.35)';
+  document.getElementById('em-type').textContent=e.type;
+  document.getElementById('em-name').textContent=e.name;
+  document.getElementById('em-desc').textContent=e.desc;
+  document.getElementById('em-price').textContent=e.price+'/person';
+  document.getElementById('em-includes').innerHTML=e.includes.map(i=>`<div class="em-inc">${i}</div>`).join('');
+  openModal('exp-modal');
+}
+function bookExp(){
+  closeModal('exp-modal');showToast('Experience book ho rahi hai! 🎉 Confirmation email aayega');
+}
+
+// ── LOGIN ──
+function openLogin(){openModal('login-modal')}
+function switchLmTab(t){
+  document.getElementById('lm-tab-login').classList.toggle('act',t==='login');
+  document.getElementById('lm-tab-signup').classList.toggle('act',t==='signup');
+  document.getElementById('lm-login-form').style.display=t==='login'?'flex':'none';
+  document.getElementById('lm-signup-form').style.display=t==='signup'?'flex':'none';
+}
+function handleLogin(){
+  const e=document.getElementById('lm-email').value.trim();
+  const p=document.getElementById('lm-pass').value.trim();
+  if(!e||!e.includes('@')){showToast('Valid email daalo!');return}
+  if(!p){showToast('Password daalo!');return}
+  closeModal('login-modal');showToast('Welcome back! Logged in ✅');
+}
+function handleGoogleLogin(){closeModal('login-modal');showToast('Google se login ho gaya! 🎉')}
+function handleSignup(){
+  const n=document.getElementById('lm-sname').value.trim();
+  const e=document.getElementById('lm-semail').value.trim();
+  const p=document.getElementById('lm-spass').value.trim();
+  if(!n){showToast('Naam daalo!');return}
+  if(!e||!e.includes('@')){showToast('Valid email daalo!');return}
+  if(!p||p.length<6){showToast('Password 6+ characters ka hona chahiye!');return}
+  closeModal('login-modal');showToast('Account ban gaya! Welcome '+n+' 🎉');
+}
+
+// ── WISHLIST PANEL ──
+function openWishlist(){
+  renderWishlist();
+  document.getElementById('wl-panel').classList.add('open');
+  openOverlay();
+}
+function closeWishlist(){
+  document.getElementById('wl-panel').classList.remove('open');
+  closeOverlay();
+}
+function renderWishlist(){
+  const wl=getWL();const body=document.getElementById('wl-body');const footer=document.getElementById('wl-footer');
+  if(wl.length===0){
+    body.innerHTML=`<div class="wl-empty"><div class="wl-empty-icon">🗺️</div><p class="wl-empty-text">Koi trip save nahi ki abhi.<br>Destinations browse karo aur ❤️ dabo!</p></div>`;
+    footer.style.display='none';return;
+  }
+  body.innerHTML=wl.map(item=>`
+    <div class="wl-item">
+      <div class="wl-item-icon" style="background:${item.bg}">${item.emoji}</div>
+      <div>
+        <div class="wl-item-name">${item.name}</div>
+        <div class="wl-item-sub">${item.country} · ${item.days}</div>
+      </div>
+      <div class="wl-item-price">${item.price}</div>
+      <button class="wl-item-del" onclick="removeWLItem('${item.id}')">✕</button>
+    </div>`).join('');
+  const total=wl.reduce((a,b)=>a+parseInt(b.price.replace(/[₹,]/g,'')),0);
+  document.getElementById('wl-total').textContent='₹'+total.toLocaleString('en-IN');
+  footer.style.display='block';
+}
+function removeWLItem(id){
+  let wl=getWL();wl=wl.filter(x=>x.id!==id);setWL(wl);
+  const btn=document.getElementById('fav-'+id);
+  if(btn){btn.textContent='🤍';btn.classList.remove('saved')}
+  updateBadge();renderWishlist();
+  showToast('Removed from saved trips');
+}
+
+// ── TRIP PLANNER (multi-step) ──
+let planStep=0,planData={};
+const planSteps=[
+  {
+    label:'Step 1 of 4',title:'Where do you want to go?',sub:'Choose a destination or let AI surprise you.',
+    render:()=>`
+      <div class="pm-options" style="grid-template-columns:1fr 1fr 1fr">
+        ${['🏖️ Beach','🏔️ Mountains','🏙️ City','🌿 Nature','🕌 Culture','🎲 Surprise me!'].map(o=>`<div class="pm-opt" onclick="selectPlanOpt(this,'dest')">${o.split(' ').join('<br>')}</div>`).join('')}
+      </div>
+      <button class="pm-next-btn" onclick="nextPlanStep()">Next →</button>`
+  },
+  {
+    label:'Step 2 of 4',title:'When are you travelling?',sub:'Pick your travel dates and duration.',
+    render:()=>`
+      <div class="pm-input-row">
+        <div class="pm-input-wrap"><div class="pm-input-label">Departure</div><input class="pm-input" type="date" id="pm-date" value="${new Date(Date.now()+7*864e5).toISOString().split('T')[0]}"/></div>
+        <div class="pm-input-wrap"><div class="pm-input-label">Duration</div><select class="pm-input" id="pm-dur"><option>3-4 Days</option><option selected>5-7 Days</option><option>8-10 Days</option><option>2+ Weeks</option></select></div>
+      </div>
+      <div class="pm-input-row">
+        <div class="pm-input-wrap"><div class="pm-input-label">Adults</div><select class="pm-input" id="pm-adults"><option>1</option><option selected>2</option><option>3</option><option>4+</option></select></div>
+        <div class="pm-input-wrap"><div class="pm-input-label">Children</div><select class="pm-input" id="pm-kids"><option selected>0</option><option>1</option><option>2</option><option>3+</option></select></div>
+      </div>
+      <button class="pm-next-btn" onclick="nextPlanStep()">Next →</button>`
+  },
+  {
+    label:'Step 3 of 4',title:'What\'s your budget?',sub:'We\'ll find the best options within your range.',
+    render:()=>`
+      <div class="pm-budget-val" id="pm-budget-val">₹60,000</div>
+      <div class="pm-range-row">
+        <input class="pm-range" type="range" min="20000" max="300000" step="5000" value="60000" id="pm-budget" oninput="updateBudget(this.value)"/>
+        <div class="pm-range-labels"><span>₹20k</span><span>₹3L+</span></div>
+      </div>
+      <div class="pm-options">
+        ${['🎒 Budget','🏨 Mid-range','💎 Luxury','✈️ Business Class'].map(o=>`<div class="pm-opt" onclick="selectPlanOpt(this,'style')">${o}</div>`).join('')}
+      </div>
+      <button class="pm-next-btn" onclick="nextPlanStep()">Build My Itinerary →</button>`
+  },
+  {
+    label:'Your AI Itinerary ✦',title:'Trip Plan Ready!',sub:'Based on your preferences, here\'s what we found:',
+    render:()=>`
+      <div class="pm-result show" id="pm-result">
+        <div class="pm-result-card"><span class="pm-rc-icon">✈️</span><div><div class="pm-rc-title">Delhi → Santorini · Apr 19</div><div class="pm-rc-sub">Economy · IndiGo + Olympic Air</div></div><span class="pm-rc-price">₹38,200</span></div>
+        <div class="pm-result-card"><span class="pm-rc-icon">🏨</span><div><div class="pm-rc-title">Caldera Villas, Oia</div><div class="pm-rc-sub">7 nights · Sea view · Breakfast incl.</div></div><span class="pm-rc-price">₹26,400</span></div>
+        <div class="pm-result-card"><span class="pm-rc-icon">🗺️</span><div><div class="pm-rc-title">Volcano Cruise + Wine Tour</div><div class="pm-rc-sub">Day 4 · 8 hours · Private guide</div></div><span class="pm-rc-price">₹7,800</span></div>
+        <div class="pm-result-card" style="border-color:var(--coral);background:rgba(232,98,58,.05)"><span class="pm-rc-icon">✦</span><div><div class="pm-rc-title" style="color:var(--coral)">Total Estimated Cost</div><div class="pm-rc-sub">Flights + Hotel + 2 Experiences</div></div><span class="pm-rc-price" style="font-size:1.2rem">₹72,400</span></div>
+      </div>
+      <button class="pm-next-btn" onclick="confirmBook()">Confirm & Book All →</button>`
+  }
+];
+function openPlanner(){planStep=0;planData={};renderPlanStep();openModal('planner-modal')}
+function renderPlanStep(){
+  const s=planSteps[planStep];
+  // update step bars
+  for(let i=0;i<4;i++) document.getElementById('psb'+(i+1)).classList.toggle('done',i<=planStep);
+  document.getElementById('pm-content').innerHTML=`
+    <div class="pm-step-label">${s.label}</div>
+    <div class="pm-title">${s.title}</div>
+    <p class="pm-sub">${s.sub}</p>
+    ${s.render()}`;
+}
+function selectPlanOpt(el,key){
+  el.closest('.pm-options').querySelectorAll('.pm-opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');planData[key]=el.textContent.trim();
+}
+function nextPlanStep(){
+  if(planStep<planSteps.length-1){planStep++;renderPlanStep()}
+}
+function updateBudget(v){
+  const n=parseInt(v);
+  document.getElementById('pm-budget-val').textContent='₹'+n.toLocaleString('en-IN');
+}
+function confirmBook(){
+  closeModal('planner-modal');showToast('🎉 Booking confirmed! Confirmation aayega email pe');
+}
+
+// ── NEWSLETTER ──
+function handleNewsletter(){
+  const n=document.getElementById('nl-name').value.trim();
+  const e=document.getElementById('nl-email').value.trim();
+  if(!n){showToast('Apna naam daalo pehle 😊');return}
+  if(!e||!e.includes('@')){showToast('Valid email daalo!');return}
+  showToast('Welcome '+n+'! First trip plan karo ✈️');
+  document.getElementById('nl-name').value='';document.getElementById('nl-email').value='';
+}
+
+// ── SCROLL ──
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40));
+const io=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('up'),i*100)});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+// init
+initFavBtns();
+</script>
+</body>
+</html>
