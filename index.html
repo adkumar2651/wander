@@ -228,13 +228,9 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
 .reveal.up{opacity:1;transform:translateY(0)}
 
-/* ════════════════════════════
-   MODALS & OVERLAYS
-════════════════════════════ */
+/* ════ MODALS ════ */
 .overlay{position:fixed;inset:0;background:rgba(26,20,16,.6);backdrop-filter:blur(4px);z-index:300;opacity:0;pointer-events:none;transition:opacity .35s}
 .overlay.open{opacity:1;pointer-events:all}
-
-/* ── DESTINATION DETAIL MODAL ── */
 .dest-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
 .dest-modal.open{opacity:1;pointer-events:all}
 .dm-box{background:var(--white);border-radius:24px;width:100%;max-width:860px;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(24px);transition:transform .35s}
@@ -256,7 +252,6 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
 .dm-day{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
 .dm-day:last-child{border-bottom:none}
 .dm-day-n{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--coral);min-width:40px;line-height:1.3}
-.dm-day-content{}
 .dm-day-title{font-size:.85rem;font-weight:500;margin-bottom:3px}
 .dm-day-sub{font-size:.78rem;color:var(--muted)}
 .dm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
@@ -269,14 +264,11 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
 .dm-save-btn{background:var(--cream);color:var(--text);border:1px solid var(--border);padding:16px 20px;border-radius:12px;font-size:.9rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:8px}
 .dm-save-btn:hover{border-color:var(--coral);color:var(--coral)}
 .dm-save-btn.saved{background:rgba(232,98,58,.08);border-color:var(--coral);color:var(--coral)}
-
-/* ── TRIP PLANNER MODAL ── */
 .planner-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
 .planner-modal.open{opacity:1;pointer-events:all}
 .pm-box{background:var(--white);border-radius:24px;width:100%;max-width:560px;position:relative;transform:translateY(24px);transition:transform .35s;overflow:hidden}
 .planner-modal.open .pm-box{transform:translateY(0)}
 .pm-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .3s;z-index:2}
-.pm-close:hover{background:var(--cream2)}
 .pm-steps-bar{display:flex;height:4px;background:var(--cream)}
 .pm-step-bar{flex:1;background:transparent;transition:background .4s}
 .pm-step-bar.done{background:var(--coral)}
@@ -308,14 +300,11 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
 .pm-rc-title{font-weight:500;font-size:.88rem;margin-bottom:3px}
 .pm-rc-sub{font-size:.75rem;color:var(--muted)}
 .pm-rc-price{margin-left:auto;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--coral);white-space:nowrap}
-
-/* ── WISHLIST PANEL ── */
 .wl-panel{position:fixed;top:0;right:0;bottom:0;width:380px;background:var(--white);z-index:500;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);box-shadow:-8px 0 40px rgba(42,32,21,.12);display:flex;flex-direction:column}
 .wl-panel.open{transform:translateX(0)}
 .wl-header{padding:28px 28px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .wl-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600}
 .wl-close{width:36px;height:36px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .3s}
-.wl-close:hover{background:var(--cream2)}
 .wl-body{flex:1;overflow-y:auto;padding:20px 28px}
 .wl-empty{text-align:center;padding:60px 20px;color:var(--muted)}
 .wl-empty-icon{font-size:3rem;margin-bottom:16px}
@@ -333,8 +322,6 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
 .wl-total-n{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--coral)}
 .wl-plan-btn{width:100%;background:var(--coral);color:#fff;border:none;padding:14px;border-radius:12px;font-size:.88rem;font-weight:500;cursor:pointer;transition:background .3s}
 .wl-plan-btn:hover{background:#d4532e}
-
-/* ── EXPERIENCE DETAIL MODAL ── */
 .exp-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
 .exp-modal.open{opacity:1;pointer-events:all}
 .em-box{background:var(--dark);border-radius:24px;width:100%;max-width:580px;max-height:88vh;overflow-y:auto;position:relative;transform:translateY(24px);transition:transform .35s;color:var(--cream)}
@@ -355,13 +342,10 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
 .em-inc{display:flex;align-items:center;gap:10px;font-size:.83rem;color:rgba(245,240,232,.55)}
 .em-inc::before{content:'✦';color:var(--gold);font-size:.6rem;flex-shrink:0}
 .em-foot{display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid rgba(255,255,255,.07)}
-.em-price-block{}
 .em-price-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:4px}
 .em-price{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--coral)}
 .em-book-btn{background:var(--coral);color:#fff;border:none;padding:14px 28px;border-radius:100px;font-size:.85rem;font-weight:500;cursor:pointer;transition:background .3s}
 .em-book-btn:hover{background:#d4532e}
-
-/* ── LOGIN MODAL ── */
 .login-modal{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .35s}
 .login-modal.open{opacity:1;pointer-events:all}
 .lm-box{background:var(--white);border-radius:24px;width:100%;max-width:420px;padding:44px;position:relative;transform:translateY(24px);transition:transform .35s}
@@ -383,31 +367,159 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
 .lm-or::before{left:0}.lm-or::after{right:0}
 .lm-google{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:13px;cursor:pointer;font-size:.85rem;font-weight:500;transition:border-color .3s}
 .lm-google:hover{border-color:var(--coral)}
-
-/* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--dark);color:var(--cream);border-radius:100px;padding:13px 26px;font-size:.82rem;box-shadow:0 8px 32px rgba(0,0,0,.2);opacity:0;transition:all .4s;z-index:9999;white-space:nowrap;border:1px solid rgba(255,255,255,.07);pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-@media(max-width:960px){
-  nav{padding:16px 22px}.nav-links{display:none}
-  section,footer{padding-left:22px;padding-right:22px}
-  #hero{padding:110px 22px 70px}
-  .hero-search{flex-wrap:wrap}.sf{border-right:none;border-bottom:1px solid var(--border)}
-  .dest-grid,.how-inner,.exp-grid,.rev-grid,.nl-inner,.footer-inner{grid-template-columns:1fr}
-  .dest-card.big{grid-row:span 1}.dest-card.big .dest-bg{font-size:7rem}
-  .dest-grid{grid-template-rows:auto}
-  .float-card,.float-card2{display:none}
-  .dm-grid{grid-template-columns:1fr}
-  .wl-panel{width:100%;max-width:400px}
+/* ══════════════════════════════════
+   MOBILE RESPONSIVE
+══════════════════════════════════ */
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .nav-right{gap:8px;}
+  .wl-btn{padding:7px 10px;font-size:.78rem;}
+  .nav-cta{padding:9px 14px;font-size:.78rem;}
+
+  #hero{padding:90px 20px 56px;text-align:center;}
+  .hero-title{font-size:clamp(3rem,13vw,5.5rem);letter-spacing:-2px;}
+  .hero-sub{font-size:.92rem;max-width:100%;}
+  .hero-search{flex-direction:column;border-radius:16px;}
+  .sf{border-right:none;border-bottom:1px solid var(--border);padding:14px 18px;}
+  .search-btn{width:100%;padding:16px;border-radius:0 0 16px 16px;font-size:.9rem;}
+  .hero-trust{flex-direction:column;gap:10px;align-items:center;}
+  .trust-sep{display:none;}
+
+  section{padding:64px 20px;}
+  .sec-title{font-size:clamp(1.9rem,8vw,3rem);}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:32px;}
+
+  .dest-grid{display:grid;grid-template-columns:1fr;grid-template-rows:auto;gap:14px;}
+  .dest-card.big{grid-row:span 1;}
+  .dest-card.big .dest-bg{font-size:6rem;}
+  .dest-card.big .dest-name{font-size:1.9rem;}
+  .dest-card{height:200px;}
+
+  .how-inner{grid-template-columns:1fr;gap:40px;}
+  .how-phone{width:230px;margin:0 auto;}
+  .float-card,.float-card2{display:none;}
+
+  .exp-grid{grid-template-columns:1fr;}
+  .exp-sec-title{font-size:clamp(1.9rem,8vw,3rem);}
+  .exp-cta-box{padding:36px 22px;}
+  .exp-cta-title{font-size:1.7rem;}
+  .exp-cta-sub{font-size:.85rem;}
+
+  .rev-grid{grid-template-columns:1fr;}
+  .rev-card{padding:24px;}
+
+  .nl-inner{grid-template-columns:1fr;gap:36px;}
+  .nl-title{font-size:clamp(1.9rem,8vw,3rem);}
+
+  .footer-inner{grid-template-columns:1fr 1fr;gap:28px;}
+  footer{padding:48px 20px;}
+  .footer-bottom{flex-direction:column;text-align:center;gap:14px;}
+
+  /* Modals → bottom sheet */
+  .dest-modal{align-items:flex-end;padding:0;}
+  .dm-box{border-radius:20px 20px 0 0;position:fixed;bottom:0;left:0;right:0;max-width:100%;max-height:90vh;}
+  .dm-hero{height:220px;border-radius:20px 20px 0 0;}
+  .dm-name{font-size:2rem;}
+  .dm-body{padding:22px 20px;}
+  .dm-grid{grid-template-columns:1fr;}
+  .dm-actions{flex-direction:column;}
+  .dm-save-btn{justify-content:center;}
+
+  .planner-modal{align-items:flex-end;padding:0;}
+  .pm-box{border-radius:22px 22px 0 0;max-width:100%;width:100%;}
+  .pm-content{padding:28px 22px;}
+  .pm-options{grid-template-columns:1fr 1fr;gap:10px;}
+  .pm-input-row{grid-template-columns:1fr;}
+  .pm-title{font-size:1.5rem;}
+
+  .exp-modal{align-items:flex-end;padding:0;}
+  .em-box{border-radius:22px 22px 0 0;max-width:100%;width:100%;max-height:90vh;}
+  .em-hero{height:190px;border-radius:22px 22px 0 0;}
+  .em-body{padding:22px 20px;}
+
+  .login-modal{align-items:flex-end;padding:0;}
+  .lm-box{border-radius:22px 22px 0 0;max-width:100%;width:100%;padding:32px 22px;}
+
+  .wl-panel{width:100%;max-width:100%;border-radius:22px 22px 0 0;top:auto;bottom:0;height:85vh;}
+
+  .toast{max-width:88vw;white-space:normal;text-align:center;font-size:.8rem;}
+}
+
+@media(max-width:480px){
+  .nav-cta{display:none;}
+  .wl-btn{font-size:.73rem;}
+
+  #hero{padding:80px 16px 48px;}
+  .hero-title{font-size:clamp(2.6rem,14vw,4rem);}
+  .hero-tag{font-size:.65rem;padding:6px 14px;}
+
+  section{padding:52px 16px;}
+  .sec-title,.exp-sec-title{font-size:clamp(1.7rem,9vw,2.6rem);}
+
+  .dest-card{height:180px;}
+  .dest-name{font-size:1.2rem;}
+  .dest-card.big{height:220px;}
+  .dest-card.big .dest-name{font-size:1.6rem;}
+
+  .step{padding:16px 0;gap:12px;}
+  .step-n{font-size:1.6rem;min-width:30px;}
+  .step-title{font-size:.98rem;}
+  .step-text{font-size:.8rem;}
+
+  .exp-card .exp-body{padding:16px;}
+  .exp-name{font-size:1rem;}
+  .exp-cta-box{padding:24px 16px;}
+  .exp-cta-title{font-size:1.45rem;}
+
+  .rev-card{padding:18px;}
+  .rev-txt{font-size:.82rem;}
+
+  #newsletter{padding:48px 16px;}
+  .nl-input,.nl-submit{padding:13px 16px;font-size:.84rem;}
+
+  footer{padding:36px 16px;}
+  .footer-inner{grid-template-columns:1fr;gap:22px;}
+  .footer-col ul{flex-direction:row;flex-wrap:wrap;gap:8px 16px;}
+  .footer-col a{font-size:.78rem;}
+
+  .dm-hero{height:190px;}
+  .dm-name{font-size:1.7rem;}
+  .dm-body{padding:16px;}
+  .dm-stats{gap:6px;}
+  .dm-stat{padding:10px 6px;}
+  .dm-stat-n{font-size:1.2rem;}
+  .dm-actions{flex-direction:column;}
+  .dm-save-btn{justify-content:center;}
+
+  .pm-content{padding:22px 16px;}
+  .pm-options{gap:8px;}
+  .pm-opt{padding:12px 8px;}
+  .pm-opt-icon{font-size:1.4rem;}
+  .pm-opt-label{font-size:.73rem;}
+  .pm-title{font-size:1.3rem;}
+  .pm-sub{font-size:.8rem;}
+  .pm-next-btn{padding:14px;font-size:.85rem;}
+
+  .lm-box{padding:26px 16px;}
+  .lm-logo{font-size:1.35rem;}
+
+  .em-hero{height:160px;}
+  .em-body{padding:18px 16px;}
+  .em-desc{font-size:.82rem;}
+  .em-name{font-size:1.45rem;}
+
+  .toast{font-size:.77rem;padding:10px 18px;max-width:88vw;white-space:normal;text-align:center;}
 }
 </style>
 </head>
 <body>
 
-<!-- ── OVERLAY ── -->
 <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
-<!-- ── NAV ── -->
 <nav id="navbar">
   <span class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">wan<span>der</span></span>
   <ul class="nav-links">
@@ -417,15 +529,12 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
     <li><a href="#reviews">Reviews</a></li>
   </ul>
   <div class="nav-right">
-    <button class="wl-btn" onclick="openWishlist()">
-      ❤️ Saved <span class="wl-badge" id="wl-badge">0</span>
-    </button>
+    <button class="wl-btn" onclick="openWishlist()">❤️ Saved <span class="wl-badge" id="wl-badge">0</span></button>
     <span class="nav-login" onclick="openLogin()">Log in</span>
     <button class="nav-cta" onclick="openPlanner()">Plan a Trip ✦</button>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-noise"></div>
   <div class="hero-orb1"></div>
@@ -434,94 +543,53 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
   <h1 class="hero-title">Go<br><em>Somewhere</em><br><span class="t2">Beautiful.</span></h1>
   <p class="hero-sub">Tell us your dream — mountains, beaches, streets of old cities. Our AI builds your perfect itinerary in seconds.</p>
   <div class="hero-search">
-    <div class="sf" onclick="openPlanner()">
-      <span class="sf-icon">🌍</span>
-      <div><div class="sf-label">Destination</div><div class="sf-val">Where to?</div></div>
-    </div>
-    <div class="sf" onclick="openPlanner()">
-      <span class="sf-icon">📅</span>
-      <div><div class="sf-label">Dates</div><div class="sf-val">Apr 12 — Apr 20</div></div>
-    </div>
-    <div class="sf" onclick="openPlanner()">
-      <span class="sf-icon">👥</span>
-      <div><div class="sf-label">Travellers</div><div class="sf-val">2 Adults</div></div>
-    </div>
+    <div class="sf" onclick="openPlanner()"><span class="sf-icon">🌍</span><div><div class="sf-label">Destination</div><div class="sf-val">Where to?</div></div></div>
+    <div class="sf" onclick="openPlanner()"><span class="sf-icon">📅</span><div><div class="sf-label">Dates</div><div class="sf-val">Apr 12 — Apr 20</div></div></div>
+    <div class="sf" onclick="openPlanner()"><span class="sf-icon">👥</span><div><div class="sf-label">Travellers</div><div class="sf-val">2 Adults</div></div></div>
     <button class="search-btn" onclick="openPlanner()">Plan My Trip ✦</button>
   </div>
   <div class="hero-trust">
-    <div class="trust-avs">
-      <div class="av a1">😊</div><div class="av a2">🧳</div><div class="av a3">🌏</div><div class="av a4">✈️</div>
-    </div>
+    <div class="trust-avs"><div class="av a1">😊</div><div class="av a2">🧳</div><div class="av a3">🌏</div><div class="av a4">✈️</div></div>
     <div class="trust-txt"><b>28,000+</b> travellers planned this month</div>
     <div class="trust-sep"></div>
     <div class="trust-stat">Rated <b>4.9★</b> on TrustPilot</div>
   </div>
 </section>
 
-<!-- ── DESTINATIONS ── -->
 <section id="destinations">
   <div class="sec-head reveal">
-    <div>
-      <div class="sec-tag">Top Picks</div>
-      <h2 class="sec-title">Trending <em>Right Now</em></h2>
-    </div>
+    <div><div class="sec-tag">Top Picks</div><h2 class="sec-title">Trending <em>Right Now</em></h2></div>
     <span class="see-all" onclick="openPlanner()">View all 180+ destinations →</span>
   </div>
   <div class="dest-grid reveal">
     <div class="dest-card big" onclick="openDest('santorini')">
-      <div class="dest-bg">🏛️</div>
-      <div class="dest-overlay"></div>
-      <div class="dest-info">
-        <div class="dest-country">Greece</div>
-        <div class="dest-name">Santorini</div>
-        <div class="dest-meta"><span class="dest-dtag">7 Days</span><span>From ₹85,000</span></div>
-      </div>
+      <div class="dest-bg">🏛️</div><div class="dest-overlay"></div>
+      <div class="dest-info"><div class="dest-country">Greece</div><div class="dest-name">Santorini</div><div class="dest-meta"><span class="dest-dtag">7 Days</span><span>From ₹85,000</span></div></div>
       <button class="fav-btn" id="fav-santorini" onclick="event.stopPropagation();toggleFav('santorini')">🤍</button>
     </div>
     <div class="dest-card" onclick="openDest('kyoto')">
-      <div class="dest-bg">🌸</div>
-      <div class="dest-overlay"></div>
-      <div class="dest-info">
-        <div class="dest-country">Japan</div>
-        <div class="dest-name">Kyoto</div>
-        <div class="dest-meta"><span class="dest-dtag">5 Days</span><span>From ₹72,000</span></div>
-      </div>
+      <div class="dest-bg">🌸</div><div class="dest-overlay"></div>
+      <div class="dest-info"><div class="dest-country">Japan</div><div class="dest-name">Kyoto</div><div class="dest-meta"><span class="dest-dtag">5 Days</span><span>From ₹72,000</span></div></div>
       <button class="fav-btn" id="fav-kyoto" onclick="event.stopPropagation();toggleFav('kyoto')">🤍</button>
     </div>
     <div class="dest-card" onclick="openDest('amalfi')">
-      <div class="dest-bg">⛵</div>
-      <div class="dest-overlay"></div>
-      <div class="dest-info">
-        <div class="dest-country">Italy</div>
-        <div class="dest-name">Amalfi Coast</div>
-        <div class="dest-meta"><span class="dest-dtag">6 Days</span><span>From ₹96,000</span></div>
-      </div>
+      <div class="dest-bg">⛵</div><div class="dest-overlay"></div>
+      <div class="dest-info"><div class="dest-country">Italy</div><div class="dest-name">Amalfi Coast</div><div class="dest-meta"><span class="dest-dtag">6 Days</span><span>From ₹96,000</span></div></div>
       <button class="fav-btn" id="fav-amalfi" onclick="event.stopPropagation();toggleFav('amalfi')">🤍</button>
     </div>
     <div class="dest-card" onclick="openDest('marrakech')">
-      <div class="dest-bg">🕌</div>
-      <div class="dest-overlay"></div>
-      <div class="dest-info">
-        <div class="dest-country">Morocco</div>
-        <div class="dest-name">Marrakech</div>
-        <div class="dest-meta"><span class="dest-dtag">4 Days</span><span>From ₹48,000</span></div>
-      </div>
+      <div class="dest-bg">🕌</div><div class="dest-overlay"></div>
+      <div class="dest-info"><div class="dest-country">Morocco</div><div class="dest-name">Marrakech</div><div class="dest-meta"><span class="dest-dtag">4 Days</span><span>From ₹48,000</span></div></div>
       <button class="fav-btn" id="fav-marrakech" onclick="event.stopPropagation();toggleFav('marrakech')">🤍</button>
     </div>
     <div class="dest-card" onclick="openDest('bali')">
-      <div class="dest-bg">🌴</div>
-      <div class="dest-overlay"></div>
-      <div class="dest-info">
-        <div class="dest-country">Indonesia</div>
-        <div class="dest-name">Bali</div>
-        <div class="dest-meta"><span class="dest-dtag">8 Days</span><span>From ₹55,000</span></div>
-      </div>
+      <div class="dest-bg">🌴</div><div class="dest-overlay"></div>
+      <div class="dest-info"><div class="dest-country">Indonesia</div><div class="dest-name">Bali</div><div class="dest-meta"><span class="dest-dtag">8 Days</span><span>From ₹55,000</span></div></div>
       <button class="fav-btn" id="fav-bali" onclick="event.stopPropagation();toggleFav('bali')">🤍</button>
     </div>
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
 <section id="how">
   <div class="how-inner">
     <div style="position:relative" class="reveal">
@@ -550,7 +618,6 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
   </div>
 </section>
 
-<!-- ── EXPERIENCES ── -->
 <section id="experiences">
   <div class="exp-head reveal">
     <div class="exp-sec-tag">Curated Experiences</div>
@@ -559,30 +626,15 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
   <div class="exp-grid reveal">
     <div class="exp-card" onclick="openExp('cooking')">
       <div class="exp-img">🍳</div>
-      <div class="exp-body">
-        <div class="exp-type">Food & Culture</div>
-        <div class="exp-name">Private Cooking Class in Bologna</div>
-        <p class="exp-text">Learn to make fresh pasta from a Bolognese grandmother. Maximum 6 guests.</p>
-        <div class="exp-foot"><span class="exp-dur">⏱ 4 hours</span><span class="exp-price">₹4,800/person</span></div>
-      </div>
+      <div class="exp-body"><div class="exp-type">Food & Culture</div><div class="exp-name">Private Cooking Class in Bologna</div><p class="exp-text">Learn to make fresh pasta from a Bolognese grandmother. Maximum 6 guests.</p><div class="exp-foot"><span class="exp-dur">⏱ 4 hours</span><span class="exp-price">₹4,800/person</span></div></div>
     </div>
     <div class="exp-card" onclick="openExp('fuji')">
       <div class="exp-img">🏔️</div>
-      <div class="exp-body">
-        <div class="exp-type">Adventure</div>
-        <div class="exp-name">Sunrise Trek on Mount Fuji</div>
-        <p class="exp-text">Guided night ascent to Japan's sacred peak for one of the world's most famous sunrises.</p>
-        <div class="exp-foot"><span class="exp-dur">⏱ 10 hours</span><span class="exp-price">₹6,200/person</span></div>
-      </div>
+      <div class="exp-body"><div class="exp-type">Adventure</div><div class="exp-name">Sunrise Trek on Mount Fuji</div><p class="exp-text">Guided night ascent to Japan's sacred peak for one of the world's most famous sunrises.</p><div class="exp-foot"><span class="exp-dur">⏱ 10 hours</span><span class="exp-price">₹6,200/person</span></div></div>
     </div>
     <div class="exp-card" onclick="openExp('sahara')">
       <div class="exp-img">🐪</div>
-      <div class="exp-body">
-        <div class="exp-type">Immersive</div>
-        <div class="exp-name">Sahara Desert Overnight Camp</div>
-        <p class="exp-text">Camel trek into the dunes, followed by a night under stars in a luxury Berber camp.</p>
-        <div class="exp-foot"><span class="exp-dur">⏱ 24 hours</span><span class="exp-price">₹8,500/person</span></div>
-      </div>
+      <div class="exp-body"><div class="exp-type">Immersive</div><div class="exp-name">Sahara Desert Overnight Camp</div><p class="exp-text">Camel trek into the dunes, followed by a night under stars in a luxury Berber camp.</p><div class="exp-foot"><span class="exp-dur">⏱ 24 hours</span><span class="exp-price">₹8,500/person</span></div></div>
     </div>
   </div>
   <div class="exp-cta-box reveal">
@@ -592,32 +644,18 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
   </div>
 </section>
 
-<!-- ── REVIEWS ── -->
 <section id="reviews">
   <div class="rev-head reveal">
     <div class="sec-tag">Traveller Stories</div>
     <h2 class="sec-title">Real Trips.<br><em>Real Memories.</em></h2>
   </div>
   <div class="rev-grid reveal">
-    <div class="rev-card">
-      <div class="rev-q">"</div>
-      <p class="rev-txt">I typed "romantic Europe trip, 10 days, surprise my wife" and Wander gave me the most <em>perfect itinerary</em> I could have imagined. She cried happy tears in Cinque Terre.</p>
-      <div class="rev-person"><div class="rev-av">👨</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">Vikram Nair</div><div class="rev-loc">Bengaluru · Oct 2024</div></div></div>
-    </div>
-    <div class="rev-card">
-      <div class="rev-q">"</div>
-      <p class="rev-txt">Solo travel used to feel overwhelming. Wander planned my <em>3-week Japan trip</em> down to train schedules and restaurant reservations. I just showed up and enjoyed.</p>
-      <div class="rev-person"><div class="rev-av">👩</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">Ananya Joshi</div><div class="rev-loc">Mumbai · Feb 2025</div></div></div>
-    </div>
-    <div class="rev-card">
-      <div class="rev-q">"</div>
-      <p class="rev-txt">Saved us <em>₹22,000</em> compared to a regular travel agent. The AI found a better hotel, cheaper flights, and added two experiences we didn't even know existed.</p>
-      <div class="rev-person"><div class="rev-av">👨‍👩‍👧</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">The Khanna Family</div><div class="rev-loc">Delhi · Dec 2024</div></div></div>
-    </div>
+    <div class="rev-card"><div class="rev-q">"</div><p class="rev-txt">I typed "romantic Europe trip, 10 days, surprise my wife" and Wander gave me the most <em>perfect itinerary</em> I could have imagined. She cried happy tears in Cinque Terre.</p><div class="rev-person"><div class="rev-av">👨</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">Vikram Nair</div><div class="rev-loc">Bengaluru · Oct 2024</div></div></div></div>
+    <div class="rev-card"><div class="rev-q">"</div><p class="rev-txt">Solo travel used to feel overwhelming. Wander planned my <em>3-week Japan trip</em> down to train schedules and restaurant reservations. I just showed up and enjoyed.</p><div class="rev-person"><div class="rev-av">👩</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">Ananya Joshi</div><div class="rev-loc">Mumbai · Feb 2025</div></div></div></div>
+    <div class="rev-card"><div class="rev-q">"</div><p class="rev-txt">Saved us <em>₹22,000</em> compared to a regular travel agent. The AI found a better hotel, cheaper flights, and added two experiences we didn't even know existed.</p><div class="rev-person"><div class="rev-av">👨‍👩‍👧</div><div><div class="rev-stars">★★★★★</div><div class="rev-name">The Khanna Family</div><div class="rev-loc">Delhi · Dec 2024</div></div></div></div>
   </div>
 </section>
 
-<!-- ── NEWSLETTER ── -->
 <section id="newsletter">
   <div class="nl-orb"></div>
   <div class="nl-inner">
@@ -642,49 +680,33 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">
-      <span class="footer-logo">wan<span>der</span></span>
-      <p>AI-powered travel planning that turns your dreams into real itineraries — instantly.</p>
-    </div>
+    <div class="footer-brand"><span class="footer-logo">wan<span>der</span></span><p>AI-powered travel planning that turns your dreams into real itineraries — instantly.</p></div>
     <div class="footer-col"><h4>Destinations</h4><ul><li><a href="#">Europe</a></li><li><a href="#">Asia</a></li><li><a href="#">Americas</a></li><li><a href="#">Africa</a></li></ul></div>
     <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
     <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Help Centre</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Cancellations</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <span class="footer-cr">© 2025 Wander Technologies Pvt. Ltd. &nbsp;·&nbsp; <span style="opacity:.4;font-size:.72rem">made by aditya kumar gupta</span></span>
-    <div class="footer-socials">
-      <div class="soc">𝕏</div><div class="soc">in</div><div class="soc">📷</div>
-    </div>
+    <div class="footer-socials"><div class="soc">𝕏</div><div class="soc">in</div><div class="soc">📷</div></div>
   </div>
 </footer>
 
-<!-- ════ DESTINATION MODAL ════ -->
+<!-- DESTINATION MODAL -->
 <div class="dest-modal" id="dest-modal">
   <div class="dm-box" id="dm-box">
     <div class="dm-hero" id="dm-hero">
       <div class="dm-hero-bg" id="dm-hero-bg"></div>
       <div class="dm-overlay"></div>
-      <div class="dm-hero-info">
-        <div class="dm-country" id="dm-country"></div>
-        <div class="dm-name" id="dm-name"></div>
-        <div class="dm-tags" id="dm-tags"></div>
-      </div>
+      <div class="dm-hero-info"><div class="dm-country" id="dm-country"></div><div class="dm-name" id="dm-name"></div><div class="dm-tags" id="dm-tags"></div></div>
       <button class="dm-close" onclick="closeModal('dest-modal')">✕</button>
     </div>
     <div class="dm-body">
       <div class="dm-stats" id="dm-stats"></div>
       <div class="dm-grid">
-        <div>
-          <div class="dm-section-title">Sample Itinerary</div>
-          <div class="dm-itinerary" id="dm-itinerary"></div>
-        </div>
-        <div>
-          <div class="dm-section-title">Trip Highlights</div>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px" id="dm-highlights"></div>
-        </div>
+        <div><div class="dm-section-title">Sample Itinerary</div><div class="dm-itinerary" id="dm-itinerary"></div></div>
+        <div><div class="dm-section-title">Trip Highlights</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px" id="dm-highlights"></div></div>
       </div>
       <div class="dm-actions">
         <button class="dm-book-btn" onclick="bookDest()">Book This Trip →</button>
@@ -694,50 +716,36 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
   </div>
 </div>
 
-<!-- ════ PLANNER MODAL ════ -->
+<!-- PLANNER MODAL -->
 <div class="planner-modal" id="planner-modal">
   <div class="pm-box">
     <button class="pm-close" onclick="closeModal('planner-modal')">✕</button>
-    <div class="pm-steps-bar">
-      <div class="pm-step-bar" id="psb1"></div>
-      <div class="pm-step-bar" id="psb2"></div>
-      <div class="pm-step-bar" id="psb3"></div>
-      <div class="pm-step-bar" id="psb4"></div>
-    </div>
+    <div class="pm-steps-bar"><div class="pm-step-bar" id="psb1"></div><div class="pm-step-bar" id="psb2"></div><div class="pm-step-bar" id="psb3"></div><div class="pm-step-bar" id="psb4"></div></div>
     <div class="pm-content" id="pm-content"></div>
   </div>
 </div>
 
-<!-- ════ EXPERIENCE MODAL ════ -->
+<!-- EXPERIENCE MODAL -->
 <div class="exp-modal" id="exp-modal">
   <div class="em-box">
     <button class="em-close" onclick="closeModal('exp-modal')">✕</button>
     <div class="em-hero" id="em-hero">
       <div class="em-hero-bg" id="em-hero-bg"></div>
       <div class="em-overlay"></div>
-      <div class="em-info">
-        <div class="em-type" id="em-type"></div>
-        <div class="em-name" id="em-name"></div>
-      </div>
+      <div class="em-info"><div class="em-type" id="em-type"></div><div class="em-name" id="em-name"></div></div>
     </div>
     <div class="em-body">
       <p class="em-desc" id="em-desc"></p>
-      <div class="em-includes">
-        <h4>What's Included</h4>
-        <div class="em-inc-list" id="em-includes"></div>
-      </div>
+      <div class="em-includes"><h4>What's Included</h4><div class="em-inc-list" id="em-includes"></div></div>
       <div class="em-foot">
-        <div class="em-price-block">
-          <div class="em-price-label">Price per person</div>
-          <div class="em-price" id="em-price"></div>
-        </div>
+        <div><div class="em-price-label">Price per person</div><div class="em-price" id="em-price"></div></div>
         <button class="em-book-btn" onclick="bookExp()">Book Experience →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════ LOGIN MODAL ════ -->
+<!-- LOGIN MODAL -->
 <div class="login-modal" id="login-modal">
   <div class="lm-box">
     <button class="lm-close" onclick="closeModal('login-modal')">✕</button>
@@ -765,303 +773,72 @@ footer{background:var(--dark);padding:60px 64px;color:rgba(245,240,232,.45)}
   </div>
 </div>
 
-<!-- ════ WISHLIST PANEL ════ -->
+<!-- WISHLIST PANEL -->
 <div class="wl-panel" id="wl-panel">
-  <div class="wl-header">
-    <div class="wl-title">❤️ Saved Trips</div>
-    <button class="wl-close" onclick="closeWishlist()">✕</button>
-  </div>
+  <div class="wl-header"><div class="wl-title">❤️ Saved Trips</div><button class="wl-close" onclick="closeWishlist()">✕</button></div>
   <div class="wl-body" id="wl-body"></div>
   <div class="wl-footer" id="wl-footer" style="display:none">
-    <div class="wl-total">
-      <span style="font-size:.82rem;color:var(--muted)">Total est. budget</span>
-      <div class="wl-total-n" id="wl-total"></div>
-    </div>
+    <div class="wl-total"><span style="font-size:.82rem;color:var(--muted)">Total est. budget</span><div class="wl-total-n" id="wl-total"></div></div>
     <button class="wl-plan-btn" onclick="closeWishlist();openPlanner()">Plan All Saved Trips →</button>
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ════════════════════════════
-// DATA
-// ════════════════════════════
-const DESTINATIONS = {
-  santorini:{name:'Santorini',country:'Greece',emoji:'🏛️',days:'7 Days',price:'₹85,000',bg:'linear-gradient(160deg,#1a3a5c,#0d1b2a)',tags:['Beach','Culture','Romantic'],stats:[{n:'7',l:'Days'},{n:'₹85k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Thira',s:'Airport transfer & check-in at Caldera Villa'},{d:'Day 2',t:'Oia Sunset Walk',s:'Explore the iconic blue-domed churches'},{d:'Day 3',t:'Akrotiri Ruins',s:'Ancient Minoan city buried by volcano'},{d:'Day 4',t:'Wine & Volcano Cruise',s:'Catamaran with dinner and hot springs'},{d:'Day 5',t:'Black Beach Day',s:'Perissa beach & local tavernas'},{d:'Day 6',t:'Fira Town',s:'Shopping, museums, and cable car views'},{d:'Day 7',t:'Depart',s:'Morning flight back home'}],highlights:['🌅 World-famous caldera sunsets','🍷 Award-winning volcanic wines','⛵ Private catamaran cruise','🏛️ 3,500-year-old Akrotiri ruins','🍽️ Cliffside seafood dining']},
-  kyoto:{name:'Kyoto',country:'Japan',emoji:'🌸',days:'5 Days',price:'₹72,000',bg:'linear-gradient(160deg,#3a1a0d,#5c2a1a)',tags:['Culture','History','Nature'],stats:[{n:'5',l:'Days'},{n:'₹72k',l:'From'},{n:'4.8★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Fushimi Inari',s:'1000 torii gates at dawn, before crowds'},{d:'Day 2',t:'Arashiyama',s:'Bamboo grove + monkey park + boat ride'},{d:'Day 3',t:'Gion District',s:'Geisha quarter, Hanamikoji street'},{d:'Day 4',t:'Nishiki Market + Kinkakuji',s:'Food market and the Golden Pavilion'},{d:'Day 5',t:'Tea Ceremony + Depart',s:'Traditional matcha experience before flight'}],highlights:['⛩️ 1000+ torii gates at Fushimi','🎋 Arashiyama bamboo forest','🎭 Gion geisha district','🍵 Traditional tea ceremony','🌸 Cherry blossom season (Mar-Apr)']},
-  amalfi:{name:'Amalfi Coast',country:'Italy',emoji:'⛵',days:'6 Days',price:'₹96,000',bg:'linear-gradient(160deg,#0d3a1a,#1a5c2a)',tags:['Scenic','Food','Romance'],stats:[{n:'6',l:'Days'},{n:'₹96k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Naples',s:'Drive the coastal road, check in at Positano'},{d:'Day 2',t:'Positano',s:'Beach, cliffs, limoncello, sunset at Le Tre Sorelle'},{d:'Day 3',t:'Ravello & Amalfi Town',s:'Villa Rufolo gardens and cathedral'},{d:'Day 4',t:'Capri Day Trip',s:'Blue Grotto, Via Camerelle, boat tour'},{d:'Day 5',t:'Pompeii',s:'Ancient Roman city preserved by Vesuvius'},{d:'Day 6',t:'Farewell Feast',s:'Private cooking class, then fly home'}],highlights:['🍋 Famous Amalfi lemons and limoncello','🏛️ Ancient Pompeii ruins','💎 Capri island day trip','🍝 Private Italian cooking class','🌊 Crystal-clear Tyrrhenian Sea']},
-  marrakech:{name:'Marrakech',country:'Morocco',emoji:'🕌',days:'4 Days',price:'₹48,000',bg:'linear-gradient(160deg,#2a1a3a,#3a0d5c)',tags:['Culture','Markets','Adventure'],stats:[{n:'4',l:'Days'},{n:'₹48k',l:'From'},{n:'4.7★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Jemaa el-Fna',s:'Arrive, explore the main square at dusk'},{d:'Day 2',t:'Medina & Souks',s:'Maze of spice markets, tanneries, and crafts'},{d:'Day 3',t:'Atlas Mountains',s:'Day trip, Berber village, traditional lunch'},{d:'Day 4',t:'Majorelle Garden',s:'Yves Saint Laurent garden + Museum'}],highlights:['🎪 Jemaa el-Fna square at night','🏺 Ancient medina and souks','⛰️ Atlas Mountains day trip','🌺 Majorelle Garden','🍵 Mint tea ceremony']},
-  bali:{name:'Bali',country:'Indonesia',emoji:'🌴',days:'8 Days',price:'₹55,000',bg:'linear-gradient(160deg,#3a2a0d,#5c3a1a)',tags:['Beaches','Wellness','Culture'],stats:[{n:'8',l:'Days'},{n:'₹55k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Denpasar',s:'Transfer to Ubud jungle retreat'},{d:'Day 2',t:'Ubud',s:'Monkey forest, rice terraces, craft markets'},{d:'Day 3',t:'Yoga & Spa',s:'Sunrise yoga, Ayurvedic massage'},{d:'Day 4',t:'Tegalalang Rice Terrace',s:'Sunrise hike and traditional breakfast'},{d:'Day 5',t:'Seminyak Beach',s:'Move to beach villa, sunset cocktails'},{d:'Day 6',t:'Uluwatu Temple',s:'Cliff-top temple, Kecak fire dance at sunset'},{d:'Day 7',t:'Nusa Penida Island',s:'Snorkelling, Kelingking Beach'},{d:'Day 8',t:'Depart',s:'Morning beach walk, fly home'}],highlights:['🌾 Tegalalang rice terraces','🕌 Uluwatu cliff-top temple','🤿 Nusa Penida snorkelling','🧘 Ubud yoga and wellness','🌅 World-famous sunsets']}
-};
+const DESTINATIONS={santorini:{name:'Santorini',country:'Greece',emoji:'🏛️',days:'7 Days',price:'₹85,000',bg:'linear-gradient(160deg,#1a3a5c,#0d1b2a)',tags:['Beach','Culture','Romantic'],stats:[{n:'7',l:'Days'},{n:'₹85k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Thira',s:'Airport transfer & check-in at Caldera Villa'},{d:'Day 2',t:'Oia Sunset Walk',s:'Explore the iconic blue-domed churches'},{d:'Day 3',t:'Akrotiri Ruins',s:'Ancient Minoan city buried by volcano'},{d:'Day 4',t:'Wine & Volcano Cruise',s:'Catamaran with dinner and hot springs'},{d:'Day 5',t:'Black Beach Day',s:'Perissa beach & local tavernas'},{d:'Day 6',t:'Fira Town',s:'Shopping, museums, and cable car views'},{d:'Day 7',t:'Depart',s:'Morning flight back home'}],highlights:['🌅 World-famous caldera sunsets','🍷 Award-winning volcanic wines','⛵ Private catamaran cruise','🏛️ 3,500-year-old Akrotiri ruins','🍽️ Cliffside seafood dining']},kyoto:{name:'Kyoto',country:'Japan',emoji:'🌸',days:'5 Days',price:'₹72,000',bg:'linear-gradient(160deg,#3a1a0d,#5c2a1a)',tags:['Culture','History','Nature'],stats:[{n:'5',l:'Days'},{n:'₹72k',l:'From'},{n:'4.8★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Fushimi Inari',s:'1000 torii gates at dawn, before crowds'},{d:'Day 2',t:'Arashiyama',s:'Bamboo grove + monkey park + boat ride'},{d:'Day 3',t:'Gion District',s:'Geisha quarter, Hanamikoji street'},{d:'Day 4',t:'Nishiki Market + Kinkakuji',s:'Food market and the Golden Pavilion'},{d:'Day 5',t:'Tea Ceremony + Depart',s:'Traditional matcha experience before flight'}],highlights:['⛩️ 1000+ torii gates at Fushimi','🎋 Arashiyama bamboo forest','🎭 Gion geisha district','🍵 Traditional tea ceremony','🌸 Cherry blossom season (Mar-Apr)']},amalfi:{name:'Amalfi Coast',country:'Italy',emoji:'⛵',days:'6 Days',price:'₹96,000',bg:'linear-gradient(160deg,#0d3a1a,#1a5c2a)',tags:['Scenic','Food','Romance'],stats:[{n:'6',l:'Days'},{n:'₹96k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Naples',s:'Drive the coastal road, check in at Positano'},{d:'Day 2',t:'Positano',s:'Beach, cliffs, limoncello, sunset at Le Tre Sorelle'},{d:'Day 3',t:'Ravello & Amalfi Town',s:'Villa Rufolo gardens and cathedral'},{d:'Day 4',t:'Capri Day Trip',s:'Blue Grotto, Via Camerelle, boat tour'},{d:'Day 5',t:'Pompeii',s:'Ancient Roman city preserved by Vesuvius'},{d:'Day 6',t:'Farewell Feast',s:'Private cooking class, then fly home'}],highlights:['🍋 Famous Amalfi lemons and limoncello','🏛️ Ancient Pompeii ruins','💎 Capri island day trip','🍝 Private Italian cooking class','🌊 Crystal-clear Tyrrhenian Sea']},marrakech:{name:'Marrakech',country:'Morocco',emoji:'🕌',days:'4 Days',price:'₹48,000',bg:'linear-gradient(160deg,#2a1a3a,#3a0d5c)',tags:['Culture','Markets','Adventure'],stats:[{n:'4',l:'Days'},{n:'₹48k',l:'From'},{n:'4.7★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Jemaa el-Fna',s:'Arrive, explore the main square at dusk'},{d:'Day 2',t:'Medina & Souks',s:'Maze of spice markets, tanneries, and crafts'},{d:'Day 3',t:'Atlas Mountains',s:'Day trip, Berber village, traditional lunch'},{d:'Day 4',t:'Majorelle Garden',s:'Yves Saint Laurent garden + Museum'}],highlights:['🎪 Jemaa el-Fna square at night','🏺 Ancient medina and souks','⛰️ Atlas Mountains day trip','🌺 Majorelle Garden','🍵 Mint tea ceremony']},bali:{name:'Bali',country:'Indonesia',emoji:'🌴',days:'8 Days',price:'₹55,000',bg:'linear-gradient(160deg,#3a2a0d,#5c3a1a)',tags:['Beaches','Wellness','Culture'],stats:[{n:'8',l:'Days'},{n:'₹55k',l:'From'},{n:'4.9★',l:'Rating'}],itinerary:[{d:'Day 1',t:'Arrive in Denpasar',s:'Transfer to Ubud jungle retreat'},{d:'Day 2',t:'Ubud',s:'Monkey forest, rice terraces, craft markets'},{d:'Day 3',t:'Yoga & Spa',s:'Sunrise yoga, Ayurvedic massage'},{d:'Day 4',t:'Tegalalang Rice Terrace',s:'Sunrise hike and traditional breakfast'},{d:'Day 5',t:'Seminyak Beach',s:'Move to beach villa, sunset cocktails'},{d:'Day 6',t:'Uluwatu Temple',s:'Cliff-top temple, Kecak fire dance at sunset'},{d:'Day 7',t:'Nusa Penida Island',s:'Snorkelling, Kelingking Beach'},{d:'Day 8',t:'Depart',s:'Morning beach walk, fly home'}],highlights:['🌾 Tegalalang rice terraces','🕌 Uluwatu cliff-top temple','🤿 Nusa Penida snorkelling','🧘 Ubud yoga and wellness','🌅 World-famous sunsets']}};
+const EXPERIENCES={cooking:{type:'Food & Culture',name:'Private Cooking Class in Bologna',emoji:'🍳',bg:'linear-gradient(135deg,#1e3a5f,#0a1f38)',price:'₹4,800',desc:'Join a Bolognese grandmother in her private kitchen for a hands-on 4-hour pasta making session. You\'ll learn to make fresh tagliatelle, tortellini, and the real ragù Bolognese that has fed her family for generations. Maximum 6 guests ensures personal attention.',includes:['All ingredients and equipment provided','Aperitivo on arrival with local wine','Take home your handmade pasta','Recipe booklet in English and Hindi','Private transfer from city centre']},fuji:{type:'Adventure',name:'Sunrise Trek on Mount Fuji',emoji:'🏔️',bg:'linear-gradient(135deg,#3a1e0a,#2a1205)',price:'₹6,200',desc:'Begin your ascent at midnight from the Fuji Subaru Line 5th Station with an expert English-speaking guide. Reach the 3,776m crater rim just as the sun rises over Japan — an experience described by travellers as life-changing. All fitness levels welcome with proper pacing.',includes:['Expert English-speaking mountain guide','Headlamp and trekking poles provided','Summit certificate','Hot ramen at the summit hut','Transport from central Tokyo']},sahara:{type:'Immersive',name:'Sahara Desert Overnight Camp',emoji:'🐪',bg:'linear-gradient(135deg,#1e3a25,#0a2215)',price:'₹8,500',desc:'Journey two hours into Morocco\'s Erg Chebbi dunes by camel at sunset. Your luxury Berber camp awaits with private tent, en-suite bathroom, and a king-sized bed under a canvas canopy. Dinner is a traditional Moroccan feast of tagine and msemen, followed by live Gnawa music around the fire.',includes:['Return camel trek (1 hour each way)','Luxury private tent with en-suite','4-course Moroccan dinner','Live Berber music and storytelling','Sunrise wake-up call with mint tea','Professional stargazing guide']}};
 
-const EXPERIENCES = {
-  cooking:{type:'Food & Culture',name:'Private Cooking Class in Bologna',emoji:'🍳',bg:'linear-gradient(135deg,#1e3a5f,#0a1f38)',price:'₹4,800',desc:'Join a Bolognese grandmother in her private kitchen for a hands-on 4-hour pasta making session. You\'ll learn to make fresh tagliatelle, tortellini, and the real ragù Bolognese that has fed her family for generations. Maximum 6 guests ensures personal attention.',includes:['All ingredients and equipment provided','Aperitivo on arrival with local wine','Take home your handmade pasta','Recipe booklet in English and Hindi','Private transfer from city centre']},
-  fuji:{type:'Adventure',name:'Sunrise Trek on Mount Fuji',emoji:'🏔️',bg:'linear-gradient(135deg,#3a1e0a,#2a1205)',price:'₹6,200',desc:'Begin your ascent at midnight from the Fuji Subaru Line 5th Station with an expert English-speaking guide. Reach the 3,776m crater rim just as the sun rises over Japan — an experience described by travellers as life-changing. All fitness levels welcome with proper pacing.',includes:['Expert English-speaking mountain guide','Headlamp and trekking poles provided','Summit certificate','Hot ramen at the summit hut','Transport from central Tokyo']},
-  sahara:{type:'Immersive',name:'Sahara Desert Overnight Camp',emoji:'🐪',bg:'linear-gradient(135deg,#1e3a25,#0a2215)',price:'₹8,500',desc:'Journey two hours into Morocco\'s Erg Chebbi dunes by camel at sunset. Your luxury Berber camp awaits with private tent, en-suite bathroom, and a king-sized bed under a canvas canopy. Dinner is a traditional Moroccan feast of tagine and msemen, followed by live Gnawa music around the fire.',includes:['Return camel trek (1 hour each way)','Luxury private tent with en-suite','4-course Moroccan dinner','Live Berber music and storytelling','Sunrise wake-up call with mint tea','Professional stargazing guide']}
-};
-
-// ════════════════════════════
-// WISHLIST (localStorage)
-// ════════════════════════════
 function getWL(){try{return JSON.parse(localStorage.getItem('wander_wl')||'[]')}catch{return[]}}
 function setWL(wl){localStorage.setItem('wander_wl',JSON.stringify(wl))}
-function updateBadge(){
-  const wl=getWL();const b=document.getElementById('wl-badge');
-  b.textContent=wl.length;b.classList.toggle('show',wl.length>0);
-}
-function toggleFav(id){
-  let wl=getWL();const d=DESTINATIONS[id];
-  const idx=wl.findIndex(x=>x.id===id);
-  const btn=document.getElementById('fav-'+id);
-  if(idx>=0){
-    wl.splice(idx,1);btn.textContent='🤍';btn.classList.remove('saved');
-    showToast(d.name+' saved trips se hata diya');
-  } else {
-    wl.push({id,name:d.name,country:d.country,emoji:d.emoji,price:d.price,days:d.days,bg:d.bg});
-    btn.textContent='❤️';btn.classList.add('saved');
-    showToast(d.name+' saved! ❤️ Wishlist mein add ho gaya');
-  }
-  setWL(wl);updateBadge();
-  const dsb=document.getElementById('dm-save-btn');
-  if(dsb&&dsb.dataset.id===id){updateDmSaveBtn(id)}
-}
-function saveFromModal(){
-  const id=document.getElementById('dm-save-btn').dataset.id;
-  if(id)toggleFav(id);
-}
-function updateDmSaveBtn(id){
-  const wl=getWL();const saved=wl.some(x=>x.id===id);
-  const btn=document.getElementById('dm-save-btn');
-  btn.textContent=saved?'❤️ Saved':'🤍 Save';
-  btn.classList.toggle('saved',saved);
-}
-function initFavBtns(){
-  const wl=getWL();
-  wl.forEach(item=>{
-    const btn=document.getElementById('fav-'+item.id);
-    if(btn){btn.textContent='❤️';btn.classList.add('saved')}
-  });
-}
+function updateBadge(){const wl=getWL();const b=document.getElementById('wl-badge');b.textContent=wl.length;b.classList.toggle('show',wl.length>0);}
+function toggleFav(id){let wl=getWL();const d=DESTINATIONS[id];const idx=wl.findIndex(x=>x.id===id);const btn=document.getElementById('fav-'+id);if(idx>=0){wl.splice(idx,1);btn.textContent='🤍';btn.classList.remove('saved');showToast(d.name+' removed from saved trips');}else{wl.push({id,name:d.name,country:d.country,emoji:d.emoji,price:d.price,days:d.days,bg:d.bg});btn.textContent='❤️';btn.classList.add('saved');showToast(d.name+' saved! ❤️');}setWL(wl);updateBadge();const dsb=document.getElementById('dm-save-btn');if(dsb&&dsb.dataset.id===id){updateDmSaveBtn(id)}}
+function saveFromModal(){const id=document.getElementById('dm-save-btn').dataset.id;if(id)toggleFav(id);}
+function updateDmSaveBtn(id){const wl=getWL();const saved=wl.some(x=>x.id===id);const btn=document.getElementById('dm-save-btn');btn.textContent=saved?'❤️ Saved':'🤍 Save';btn.classList.toggle('saved',saved);}
+function initFavBtns(){const wl=getWL();wl.forEach(item=>{const btn=document.getElementById('fav-'+item.id);if(btn){btn.textContent='❤️';btn.classList.add('saved')}});}
 updateBadge();
 
-// ════════════════════════════
-// OPEN / CLOSE
-// ════════════════════════════
 let currentDest=null;
 function openOverlay(){document.getElementById('overlay').classList.add('open')}
 function closeOverlay(){document.getElementById('overlay').classList.remove('open')}
 function openModal(id){document.getElementById(id).classList.add('open');openOverlay()}
 function closeModal(id){document.getElementById(id).classList.remove('open');closeOverlay()}
-function closeAll(){
-  ['dest-modal','planner-modal','exp-modal','login-modal'].forEach(id=>document.getElementById(id).classList.remove('open'));
-  closeOverlay();
-}
+function closeAll(){['dest-modal','planner-modal','exp-modal','login-modal'].forEach(id=>document.getElementById(id).classList.remove('open'));closeOverlay();}
 
-// ── DESTINATION MODAL ──
-function openDest(id){
-  const d=DESTINATIONS[id];currentDest=id;
-  document.getElementById('dm-hero').style.background=d.bg;
-  document.getElementById('dm-hero-bg').textContent=d.emoji;
-  document.getElementById('dm-hero-bg').style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11rem;filter:opacity(.4)';
-  document.getElementById('dm-country').textContent=d.country;
-  document.getElementById('dm-name').textContent=d.name;
-  document.getElementById('dm-tags').innerHTML=d.tags.map(t=>`<span class="dm-tag">${t}</span>`).join('');
-  document.getElementById('dm-stats').innerHTML=d.stats.map(s=>`<div class="dm-stat"><div class="dm-stat-n">${s.n}</div><div class="dm-stat-l">${s.l}</div></div>`).join('');
-  document.getElementById('dm-itinerary').innerHTML=d.itinerary.map(x=>`<div class="dm-day"><div class="dm-day-n">${x.d}</div><div class="dm-day-content"><div class="dm-day-title">${x.t}</div><div class="dm-day-sub">${x.s}</div></div></div>`).join('');
-  document.getElementById('dm-highlights').innerHTML=d.highlights.map(h=>`<div style="font-size:.83rem;color:var(--muted);display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)">${h}</div>`).join('');
-  document.getElementById('dm-save-btn').dataset.id=id;
-  updateDmSaveBtn(id);
-  openModal('dest-modal');
-}
-function bookDest(){
-  closeModal('dest-modal');
-  const d=DESTINATIONS[currentDest];
-  showToast('Booking process start ho raha hai ✈️ — '+(d?d.name:''));
-  setTimeout(()=>openPlanner(),400);
-}
+function openDest(id){const d=DESTINATIONS[id];currentDest=id;document.getElementById('dm-hero').style.background=d.bg;document.getElementById('dm-hero-bg').textContent=d.emoji;document.getElementById('dm-hero-bg').style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11rem;filter:opacity(.4)';document.getElementById('dm-country').textContent=d.country;document.getElementById('dm-name').textContent=d.name;document.getElementById('dm-tags').innerHTML=d.tags.map(t=>`<span class="dm-tag">${t}</span>`).join('');document.getElementById('dm-stats').innerHTML=d.stats.map(s=>`<div class="dm-stat"><div class="dm-stat-n">${s.n}</div><div class="dm-stat-l">${s.l}</div></div>`).join('');document.getElementById('dm-itinerary').innerHTML=d.itinerary.map(x=>`<div class="dm-day"><div class="dm-day-n">${x.d}</div><div class="dm-day-content"><div class="dm-day-title">${x.t}</div><div class="dm-day-sub">${x.s}</div></div></div>`).join('');document.getElementById('dm-highlights').innerHTML=d.highlights.map(h=>`<div style="font-size:.83rem;color:var(--muted);display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)">${h}</div>`).join('');document.getElementById('dm-save-btn').dataset.id=id;updateDmSaveBtn(id);openModal('dest-modal');}
+function bookDest(){closeModal('dest-modal');showToast('Booking process start ho raha hai ✈️');setTimeout(()=>openPlanner(),400);}
 
-// ── EXPERIENCE MODAL ──
-function openExp(id){
-  const e=EXPERIENCES[id];
-  document.getElementById('em-hero').style.background=e.bg;
-  document.getElementById('em-hero-bg').textContent=e.emoji;
-  document.getElementById('em-hero-bg').style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7rem;filter:opacity(.35)';
-  document.getElementById('em-type').textContent=e.type;
-  document.getElementById('em-name').textContent=e.name;
-  document.getElementById('em-desc').textContent=e.desc;
-  document.getElementById('em-price').textContent=e.price+'/person';
-  document.getElementById('em-includes').innerHTML=e.includes.map(i=>`<div class="em-inc">${i}</div>`).join('');
-  openModal('exp-modal');
-}
-function bookExp(){
-  closeModal('exp-modal');showToast('Experience book ho rahi hai! 🎉 Confirmation email aayega');
-}
+function openExp(id){const e=EXPERIENCES[id];document.getElementById('em-hero').style.background=e.bg;document.getElementById('em-hero-bg').textContent=e.emoji;document.getElementById('em-hero-bg').style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:7rem;filter:opacity(.35)';document.getElementById('em-type').textContent=e.type;document.getElementById('em-name').textContent=e.name;document.getElementById('em-desc').textContent=e.desc;document.getElementById('em-price').textContent=e.price+'/person';document.getElementById('em-includes').innerHTML=e.includes.map(i=>`<div class="em-inc">${i}</div>`).join('');openModal('exp-modal');}
+function bookExp(){closeModal('exp-modal');showToast('Experience book ho rahi hai! 🎉');}
 
-// ── LOGIN ──
 function openLogin(){openModal('login-modal')}
-function switchLmTab(t){
-  document.getElementById('lm-tab-login').classList.toggle('act',t==='login');
-  document.getElementById('lm-tab-signup').classList.toggle('act',t==='signup');
-  document.getElementById('lm-login-form').style.display=t==='login'?'flex':'none';
-  document.getElementById('lm-signup-form').style.display=t==='signup'?'flex':'none';
-}
-function handleLogin(){
-  const e=document.getElementById('lm-email').value.trim();
-  const p=document.getElementById('lm-pass').value.trim();
-  if(!e||!e.includes('@')){showToast('Valid email daalo!');return}
-  if(!p){showToast('Password daalo!');return}
-  closeModal('login-modal');showToast('Welcome back! Logged in ✅');
-}
+function switchLmTab(t){document.getElementById('lm-tab-login').classList.toggle('act',t==='login');document.getElementById('lm-tab-signup').classList.toggle('act',t==='signup');document.getElementById('lm-login-form').style.display=t==='login'?'flex':'none';document.getElementById('lm-signup-form').style.display=t==='signup'?'flex':'none';}
+function handleLogin(){const e=document.getElementById('lm-email').value.trim();const p=document.getElementById('lm-pass').value.trim();if(!e||!e.includes('@')){showToast('Valid email daalo!');return}if(!p){showToast('Password daalo!');return}closeModal('login-modal');showToast('Welcome back! Logged in ✅');}
 function handleGoogleLogin(){closeModal('login-modal');showToast('Google se login ho gaya! 🎉')}
-function handleSignup(){
-  const n=document.getElementById('lm-sname').value.trim();
-  const e=document.getElementById('lm-semail').value.trim();
-  const p=document.getElementById('lm-spass').value.trim();
-  if(!n){showToast('Naam daalo!');return}
-  if(!e||!e.includes('@')){showToast('Valid email daalo!');return}
-  if(!p||p.length<6){showToast('Password 6+ characters ka hona chahiye!');return}
-  closeModal('login-modal');showToast('Account ban gaya! Welcome '+n+' 🎉');
-}
+function handleSignup(){const n=document.getElementById('lm-sname').value.trim();const e=document.getElementById('lm-semail').value.trim();const p=document.getElementById('lm-spass').value.trim();if(!n){showToast('Naam daalo!');return}if(!e||!e.includes('@')){showToast('Valid email daalo!');return}if(!p||p.length<6){showToast('Password 6+ characters ka hona chahiye!');return}closeModal('login-modal');showToast('Account ban gaya! Welcome '+n+' 🎉');}
 
-// ── WISHLIST PANEL ──
-function openWishlist(){
-  renderWishlist();
-  document.getElementById('wl-panel').classList.add('open');
-  openOverlay();
-}
-function closeWishlist(){
-  document.getElementById('wl-panel').classList.remove('open');
-  closeOverlay();
-}
-function renderWishlist(){
-  const wl=getWL();const body=document.getElementById('wl-body');const footer=document.getElementById('wl-footer');
-  if(wl.length===0){
-    body.innerHTML=`<div class="wl-empty"><div class="wl-empty-icon">🗺️</div><p class="wl-empty-text">Koi trip save nahi ki abhi.<br>Destinations browse karo aur ❤️ dabo!</p></div>`;
-    footer.style.display='none';return;
-  }
-  body.innerHTML=wl.map(item=>`
-    <div class="wl-item">
-      <div class="wl-item-icon" style="background:${item.bg}">${item.emoji}</div>
-      <div>
-        <div class="wl-item-name">${item.name}</div>
-        <div class="wl-item-sub">${item.country} · ${item.days}</div>
-      </div>
-      <div class="wl-item-price">${item.price}</div>
-      <button class="wl-item-del" onclick="removeWLItem('${item.id}')">✕</button>
-    </div>`).join('');
-  const total=wl.reduce((a,b)=>a+parseInt(b.price.replace(/[₹,]/g,'')),0);
-  document.getElementById('wl-total').textContent='₹'+total.toLocaleString('en-IN');
-  footer.style.display='block';
-}
-function removeWLItem(id){
-  let wl=getWL();wl=wl.filter(x=>x.id!==id);setWL(wl);
-  const btn=document.getElementById('fav-'+id);
-  if(btn){btn.textContent='🤍';btn.classList.remove('saved')}
-  updateBadge();renderWishlist();
-  showToast('Removed from saved trips');
-}
+function openWishlist(){renderWishlist();document.getElementById('wl-panel').classList.add('open');openOverlay();}
+function closeWishlist(){document.getElementById('wl-panel').classList.remove('open');closeOverlay();}
+function renderWishlist(){const wl=getWL();const body=document.getElementById('wl-body');const footer=document.getElementById('wl-footer');if(wl.length===0){body.innerHTML=`<div class="wl-empty"><div class="wl-empty-icon">🗺️</div><p class="wl-empty-text">Koi trip save nahi ki abhi.<br>Destinations browse karo aur ❤️ dabo!</p></div>`;footer.style.display='none';return;}body.innerHTML=wl.map(item=>`<div class="wl-item"><div class="wl-item-icon" style="background:${item.bg}">${item.emoji}</div><div><div class="wl-item-name">${item.name}</div><div class="wl-item-sub">${item.country} · ${item.days}</div></div><div class="wl-item-price">${item.price}</div><button class="wl-item-del" onclick="removeWLItem('${item.id}')">✕</button></div>`).join('');const total=wl.reduce((a,b)=>a+parseInt(b.price.replace(/[₹,]/g,'')),0);document.getElementById('wl-total').textContent='₹'+total.toLocaleString('en-IN');footer.style.display='block';}
+function removeWLItem(id){let wl=getWL();wl=wl.filter(x=>x.id!==id);setWL(wl);const btn=document.getElementById('fav-'+id);if(btn){btn.textContent='🤍';btn.classList.remove('saved')}updateBadge();renderWishlist();showToast('Removed from saved trips');}
 
-// ── TRIP PLANNER (multi-step) ──
 let planStep=0,planData={};
-const planSteps=[
-  {
-    label:'Step 1 of 4',title:'Where do you want to go?',sub:'Choose a destination or let AI surprise you.',
-    render:()=>`
-      <div class="pm-options" style="grid-template-columns:1fr 1fr 1fr">
-        ${['🏖️ Beach','🏔️ Mountains','🏙️ City','🌿 Nature','🕌 Culture','🎲 Surprise me!'].map(o=>`<div class="pm-opt" onclick="selectPlanOpt(this,'dest')">${o.split(' ').join('<br>')}</div>`).join('')}
-      </div>
-      <button class="pm-next-btn" onclick="nextPlanStep()">Next →</button>`
-  },
-  {
-    label:'Step 2 of 4',title:'When are you travelling?',sub:'Pick your travel dates and duration.',
-    render:()=>`
-      <div class="pm-input-row">
-        <div class="pm-input-wrap"><div class="pm-input-label">Departure</div><input class="pm-input" type="date" id="pm-date" value="${new Date(Date.now()+7*864e5).toISOString().split('T')[0]}"/></div>
-        <div class="pm-input-wrap"><div class="pm-input-label">Duration</div><select class="pm-input" id="pm-dur"><option>3-4 Days</option><option selected>5-7 Days</option><option>8-10 Days</option><option>2+ Weeks</option></select></div>
-      </div>
-      <div class="pm-input-row">
-        <div class="pm-input-wrap"><div class="pm-input-label">Adults</div><select class="pm-input" id="pm-adults"><option>1</option><option selected>2</option><option>3</option><option>4+</option></select></div>
-        <div class="pm-input-wrap"><div class="pm-input-label">Children</div><select class="pm-input" id="pm-kids"><option selected>0</option><option>1</option><option>2</option><option>3+</option></select></div>
-      </div>
-      <button class="pm-next-btn" onclick="nextPlanStep()">Next →</button>`
-  },
-  {
-    label:'Step 3 of 4',title:'What\'s your budget?',sub:'We\'ll find the best options within your range.',
-    render:()=>`
-      <div class="pm-budget-val" id="pm-budget-val">₹60,000</div>
-      <div class="pm-range-row">
-        <input class="pm-range" type="range" min="20000" max="300000" step="5000" value="60000" id="pm-budget" oninput="updateBudget(this.value)"/>
-        <div class="pm-range-labels"><span>₹20k</span><span>₹3L+</span></div>
-      </div>
-      <div class="pm-options">
-        ${['🎒 Budget','🏨 Mid-range','💎 Luxury','✈️ Business Class'].map(o=>`<div class="pm-opt" onclick="selectPlanOpt(this,'style')">${o}</div>`).join('')}
-      </div>
-      <button class="pm-next-btn" onclick="nextPlanStep()">Build My Itinerary →</button>`
-  },
-  {
-    label:'Your AI Itinerary ✦',title:'Trip Plan Ready!',sub:'Based on your preferences, here\'s what we found:',
-    render:()=>`
-      <div class="pm-result show" id="pm-result">
-        <div class="pm-result-card"><span class="pm-rc-icon">✈️</span><div><div class="pm-rc-title">Delhi → Santorini · Apr 19</div><div class="pm-rc-sub">Economy · IndiGo + Olympic Air</div></div><span class="pm-rc-price">₹38,200</span></div>
-        <div class="pm-result-card"><span class="pm-rc-icon">🏨</span><div><div class="pm-rc-title">Caldera Villas, Oia</div><div class="pm-rc-sub">7 nights · Sea view · Breakfast incl.</div></div><span class="pm-rc-price">₹26,400</span></div>
-        <div class="pm-result-card"><span class="pm-rc-icon">🗺️</span><div><div class="pm-rc-title">Volcano Cruise + Wine Tour</div><div class="pm-rc-sub">Day 4 · 8 hours · Private guide</div></div><span class="pm-rc-price">₹7,800</span></div>
-        <div class="pm-result-card" style="border-color:var(--coral);background:rgba(232,98,58,.05)"><span class="pm-rc-icon">✦</span><div><div class="pm-rc-title" style="color:var(--coral)">Total Estimated Cost</div><div class="pm-rc-sub">Flights + Hotel + 2 Experiences</div></div><span class="pm-rc-price" style="font-size:1.2rem">₹72,400</span></div>
-      </div>
-      <button class="pm-next-btn" onclick="confirmBook()">Confirm & Book All →</button>`
-  }
-];
+const planSteps=[{label:'Step 1 of 4',title:'Where do you want to go?',sub:'Choose a destination or let AI surprise you.',render:()=>`<div class="pm-options" style="grid-template-columns:1fr 1fr 1fr">${['🏖️ Beach','🏔️ Mountains','🏙️ City','🌿 Nature','🕌 Culture','🎲 Surprise me!'].map(o=>`<div class="pm-opt" onclick="selectPlanOpt(this,'dest')">${o.split(' ').join('<br>')}</div>`).join('')}</div><button class="pm-next-btn" onclick="nextPlanStep()">Next →</button>`},{label:'Step 2 of 4',title:'When are you travelling?',sub:'Pick your travel dates and duration.',render:()=>`<div class="pm-input-row"><div class="pm-input-wrap"><div class="pm-input-label">Departure</div><input class="pm-input" type="date" id="pm-date" value="${new Date(Date.now()+7*864e5).toISOString().split('T')[0]}"/></div><div class="pm-input-wrap"><div class="pm-input-label">Duration</div><select class="pm-input" id="pm-dur"><option>3-4 Days</option><option selected>5-7 Days</option><option>8-10 Days</option><option>2+ Weeks</option></select></div></div><div class="pm-input-row"><div class="pm-input-wrap"><div class="pm-input-label">Adults</div><select class="pm-input" id="pm-adults"><option>1</option><option selected>2</option><option>3</option><option>4+</option></select></div><div class="pm-input-wrap"><div class="pm-input-label">Children</div><select class="pm-input" id="pm-kids"><option selected>0</option><option>1</option><option>2</option><option>3+</option></select></div></div><button class="pm-next-btn" onclick="nextPlanStep()">Next →</button>`},{label:'Step 3 of 4',title:"What's your budget?",sub:"We'll find the best options within your range.",render:()=>`<div class="pm-budget-val" id="pm-budget-val">₹60,000</div><div class="pm-range-row"><input class="pm-range" type="range" min="20000" max="300000" step="5000" value="60000" id="pm-budget" oninput="updateBudget(this.value)"/><div class="pm-range-labels"><span>₹20k</span><span>₹3L+</span></div></div><div class="pm-options">${['🎒 Budget','🏨 Mid-range','💎 Luxury','✈️ Business Class'].map(o=>`<div class="pm-opt" onclick="selectPlanOpt(this,'style')">${o}</div>`).join('')}</div><button class="pm-next-btn" onclick="nextPlanStep()">Build My Itinerary →</button>`},{label:'Your AI Itinerary ✦',title:'Trip Plan Ready!',sub:'Based on your preferences, here\'s what we found:',render:()=>`<div class="pm-result show" id="pm-result"><div class="pm-result-card"><span class="pm-rc-icon">✈️</span><div><div class="pm-rc-title">Delhi → Santorini · Apr 19</div><div class="pm-rc-sub">Economy · IndiGo + Olympic Air</div></div><span class="pm-rc-price">₹38,200</span></div><div class="pm-result-card"><span class="pm-rc-icon">🏨</span><div><div class="pm-rc-title">Caldera Villas, Oia</div><div class="pm-rc-sub">7 nights · Sea view · Breakfast incl.</div></div><span class="pm-rc-price">₹26,400</span></div><div class="pm-result-card"><span class="pm-rc-icon">🗺️</span><div><div class="pm-rc-title">Volcano Cruise + Wine Tour</div><div class="pm-rc-sub">Day 4 · 8 hours · Private guide</div></div><span class="pm-rc-price">₹7,800</span></div><div class="pm-result-card" style="border-color:var(--coral);background:rgba(232,98,58,.05)"><span class="pm-rc-icon">✦</span><div><div class="pm-rc-title" style="color:var(--coral)">Total Estimated Cost</div><div class="pm-rc-sub">Flights + Hotel + 2 Experiences</div></div><span class="pm-rc-price" style="font-size:1.2rem">₹72,400</span></div></div><button class="pm-next-btn" onclick="confirmBook()">Confirm & Book All →</button>`}];
 function openPlanner(){planStep=0;planData={};renderPlanStep();openModal('planner-modal')}
-function renderPlanStep(){
-  const s=planSteps[planStep];
-  // update step bars
-  for(let i=0;i<4;i++) document.getElementById('psb'+(i+1)).classList.toggle('done',i<=planStep);
-  document.getElementById('pm-content').innerHTML=`
-    <div class="pm-step-label">${s.label}</div>
-    <div class="pm-title">${s.title}</div>
-    <p class="pm-sub">${s.sub}</p>
-    ${s.render()}`;
-}
-function selectPlanOpt(el,key){
-  el.closest('.pm-options').querySelectorAll('.pm-opt').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');planData[key]=el.textContent.trim();
-}
-function nextPlanStep(){
-  if(planStep<planSteps.length-1){planStep++;renderPlanStep()}
-}
-function updateBudget(v){
-  const n=parseInt(v);
-  document.getElementById('pm-budget-val').textContent='₹'+n.toLocaleString('en-IN');
-}
-function confirmBook(){
-  closeModal('planner-modal');showToast('🎉 Booking confirmed! Confirmation aayega email pe');
-}
+function renderPlanStep(){const s=planSteps[planStep];for(let i=0;i<4;i++)document.getElementById('psb'+(i+1)).classList.toggle('done',i<=planStep);document.getElementById('pm-content').innerHTML=`<div class="pm-step-label">${s.label}</div><div class="pm-title">${s.title}</div><p class="pm-sub">${s.sub}</p>${s.render()}`;}
+function selectPlanOpt(el,key){el.closest('.pm-options').querySelectorAll('.pm-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');planData[key]=el.textContent.trim();}
+function nextPlanStep(){if(planStep<planSteps.length-1){planStep++;renderPlanStep()}}
+function updateBudget(v){document.getElementById('pm-budget-val').textContent='₹'+parseInt(v).toLocaleString('en-IN');}
+function confirmBook(){closeModal('planner-modal');showToast('🎉 Booking confirmed! Confirmation aayega email pe');}
 
-// ── NEWSLETTER ──
-function handleNewsletter(){
-  const n=document.getElementById('nl-name').value.trim();
-  const e=document.getElementById('nl-email').value.trim();
-  if(!n){showToast('Apna naam daalo pehle 😊');return}
-  if(!e||!e.includes('@')){showToast('Valid email daalo!');return}
-  showToast('Welcome '+n+'! First trip plan karo ✈️');
-  document.getElementById('nl-name').value='';document.getElementById('nl-email').value='';
-}
+function handleNewsletter(){const n=document.getElementById('nl-name').value.trim();const e=document.getElementById('nl-email').value.trim();if(!n){showToast('Apna naam daalo pehle 😊');return}if(!e||!e.includes('@')){showToast('Valid email daalo!');return}showToast('Welcome '+n+'! First trip plan karo ✈️');document.getElementById('nl-name').value='';document.getElementById('nl-email').value='';}
 
-// ── SCROLL ──
 window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40));
-const io=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('up'),i*100)});
-},{threshold:.1});
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('up'),i*100)});},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// ── TOAST ──
-function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3200);
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3200);}
 
-// init
 initFavBtns();
 </script>
 </body>
